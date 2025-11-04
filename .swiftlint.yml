@@ -6,6 +6,7 @@ disabled_rules:
   - explicit_enum_raw_value
   - file_length
   - function_body_length
+  - redundant_discardable_let  # Preserve 'let _ =' in result builder contexts (required for Swift 6.0+)
 
 opt_in_rules:
   - empty_count
