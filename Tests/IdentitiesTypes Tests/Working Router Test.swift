@@ -14,24 +14,24 @@ import Testing
 @Suite("Working Router Test")
 struct WorkingRouterTest {
 
-  @Test("Basic router test")
-  func testBasicRouter() throws {
-    let router = Identity.API.Router()
+    @Test("Basic router test")
+    func testBasicRouter() throws {
+        let router = Identity.API.Router()
 
-    // Create a simple API request
-    let api: Identity.API = .logout(.current)
+        // Create a simple API request
+        let api: Identity.API = .logout(.current)
 
-    // Get URLRequest from router
-    let request = try router.request(for: api)
+        // Get URLRequest from router
+        let request = try router.request(for: api)
 
-    // Check URL path
-    #expect(request.url?.path == "/logout")
+        // Check URL path
+        #expect(request.url?.path == "/logout")
 
-    // Check method
-    #expect(request.httpMethod == "POST")
+        // Check method
+        #expect(request.httpMethod == "POST")
 
-    // Round-trip test
-    let match = try router.match(request: request)
-    #expect(match.is(\.logout.current))
-  }
+        // Round-trip test
+        let match = try router.match(request: request)
+        #expect(match.is(\.logout.current))
+    }
 }

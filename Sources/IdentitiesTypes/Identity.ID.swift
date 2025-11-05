@@ -9,5 +9,5 @@ import Foundation
 import TypesFoundation
 
 extension Identity {
-  public typealias ID = Tagged<Identity, UUID>
+    public typealias ID = Tagged<Identity, UUID>
 }

@@ -10,8 +10,8 @@ import JWT
 import TypesFoundation
 
 extension Identity.Reauthorization {
-  @DependencyClient
-  public struct Client: @unchecked Sendable {
-    public var reauthorize: (_ password: String) async throws -> JWT
-  }
+    @DependencyClient
+    public struct Client: @unchecked Sendable {
+        public var reauthorize: (_ password: String) async throws -> JWT
+    }
 }

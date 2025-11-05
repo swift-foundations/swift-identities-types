@@ -1,9 +1,7 @@
 # swift-identities-types
 
-[![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
-[![Platforms](https://img.shields.io/badge/Platforms-macOS%2014%2B%20|%20iOS%2017%2B-lightgray.svg)]()
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![CI](https://github.com/coenttb/swift-identities-types/workflows/CI/badge.svg)](https://github.com/coenttb/swift-identities-types/actions/workflows/ci.yml)
+![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 Type-safe Swift definitions for identity authentication and management with dependency injection and URL routing support.
 
