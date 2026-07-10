@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import TypesFoundation
+import Tagged_Primitives
+import URLRouting
 
 extension Identity {
     public typealias ID = Tagged<Identity, UUID>

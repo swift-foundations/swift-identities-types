@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 22/08/2025.
 //
 
-import TypesFoundation
+import URLRouting
 
 extension Identity {
     /// Namespace for logout functionality.

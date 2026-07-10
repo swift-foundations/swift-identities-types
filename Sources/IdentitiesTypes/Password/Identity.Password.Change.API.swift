@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Password.Change {
     /// Password change API endpoints for authenticated users.

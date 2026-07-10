@@ -6,47 +6,42 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import Foundation
 
 extension Identity.MFA.TOTP {
     /// Client for managing TOTP operations
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
 
         // MARK: - Setup Operations
 
         /// Generate a new TOTP secret for initial setup
-        @DependencyEndpoint
-        public var generateSecret: () async throws -> SetupData
+        public var generateSecret: () async throws(any Swift.Error) -> SetupData
 
         /// Confirm TOTP setup by verifying the initial code
-        @DependencyEndpoint
         public var confirmSetup:
             (
                 _ identityId: Identity.ID,
                 _ secret: String,
                 _ code: String
-            ) async throws -> Void
+            ) async throws(any Swift.Error) -> Void
 
         // MARK: - Verification Operations
 
         /// Verify a TOTP code during authentication
-        @DependencyEndpoint
         public var verifyCode:
             (
                 _ identityId: Identity.ID,
                 _ code: String
-            ) async throws -> Bool
+            ) async throws(any Swift.Error) -> Bool
 
         /// Verify a TOTP code with custom window
-        @DependencyEndpoint
         public var verifyCodeWithWindow:
             (
                 _ identityId: Identity.ID,
                 _ code: String,
                 _ window: Int
-            ) async throws -> Bool
+            ) async throws(any Swift.Error) -> Bool
 
         /// Verify a TOTP code during MFA login flow.
         ///
@@ -57,71 +52,63 @@ extension Identity.MFA.TOTP {
         ///   - code: The TOTP code from the authenticator app
         ///   - sessionToken: The MFA session token from initial authentication
         /// - Returns: Full authentication response with access and refresh tokens
-        @DependencyEndpoint
         public var verify:
             (
                 _ code: String,
                 _ sessionToken: String
-            ) async throws -> Identity.Authentication.Response
+            ) async throws(any Swift.Error) -> Identity.Authentication.Response
 
         // MARK: - Backup Code Operations
 
         /// Generate backup codes for recovery
-        @DependencyEndpoint
         public var generateBackupCodes:
             (
                 _ identityId: Identity.ID,
                 _ count: Int
-            ) async throws -> [String]
+            ) async throws(any Swift.Error) -> [String]
 
         /// Verify a backup code
-        @DependencyEndpoint
         public var verifyBackupCode:
             (
                 _ identityId: Identity.ID,
                 _ code: String
-            ) async throws -> Bool
+            ) async throws(any Swift.Error) -> Bool
 
         /// Get remaining backup codes count
-        @DependencyEndpoint
         public var remainingBackupCodes:
             (
                 _ identityId: Identity.ID
-            ) async throws -> Int
+            ) async throws(any Swift.Error) -> Int
 
         // MARK: - Management Operations
 
         /// Check if TOTP is enabled for an identity
-        @DependencyEndpoint
         public var isEnabled:
             (
                 _ identityId: Identity.ID
-            ) async throws -> Bool
+            ) async throws(any Swift.Error) -> Bool
 
         /// Disable TOTP for an identity
-        @DependencyEndpoint
         public var disable:
             (
                 _ identityId: Identity.ID
-            ) async throws -> Void
+            ) async throws(any Swift.Error) -> Void
 
         /// Get TOTP status for an identity
-        @DependencyEndpoint
         public var getStatus:
             (
                 _ identityId: Identity.ID
-            ) async throws -> Status
+            ) async throws(any Swift.Error) -> Status
 
         // MARK: - QR Code Generation
 
         /// Generate QR code URL for authenticator apps
-        @DependencyEndpoint
         public var generateQRCodeURL:
             (
                 _ secret: String,
                 _ email: String,
                 _ issuer: String
-            ) async throws -> URL
+            ) async throws(any Swift.Error) -> URL
     }
 }
 

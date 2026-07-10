@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Logout {
     /// Logout operations for terminating user sessions.

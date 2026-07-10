@@ -6,7 +6,8 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
+import URLFormCodingURLRouting
 
 extension Identity.Creation {
     /// Identity creation endpoints that handle new user registration and verification.

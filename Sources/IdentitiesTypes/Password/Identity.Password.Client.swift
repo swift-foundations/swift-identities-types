@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import EmailAddress
 import Foundation
 
@@ -28,7 +27,6 @@ extension Identity.Password {
     /// // Change password while authenticated
     /// try await client.change.request("currentPass", "newPass123")
     /// ```
-    @DependencyClient
     public struct Client: @unchecked Sendable {
         /// Interface for password reset operations.
         public var reset: Identity.Password.Reset.Client
@@ -42,8 +40,8 @@ extension Identity.Password {
         ///   - reset: The handler for password reset operations
         ///   - change: The handler for password change operations
         public init(
-            reset: Identity.Password.Reset.Client,
-            change: Identity.Password.Change.Client
+            reset: Identity.Password.Reset.Client = .unimplemented(),
+            change: Identity.Password.Change.Client = .unimplemented()
         ) {
             self.reset = reset
             self.change = change
@@ -60,7 +58,7 @@ extension Identity.Password.Reset {
     ///
     /// > Important: Password resets require email verification to prevent
     /// unauthorized access to identities.
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Initiates a password reset request.
         ///
@@ -70,7 +68,7 @@ extension Identity.Password.Reset {
         /// 3. Sends a reset email
         ///
         /// - Parameter email: The email address of the identity
-        public var request: (_ email: String) async throws -> Void
+        public var request: (_ email: String) async throws(any Swift.Error) -> Void
 
         /// Confirms a password reset with a verification token.
         ///
@@ -82,7 +80,7 @@ extension Identity.Password.Reset {
         /// - Parameters:
         ///   - newPassword: The new password to set
         ///   - token: The verification token from the reset email
-        public var confirm: (_ newPassword: String, _ token: String) async throws -> Void
+        public var confirm: (_ newPassword: String, _ token: String) async throws(any Swift.Error) -> Void
     }
 }
 
@@ -91,7 +89,7 @@ extension Identity.Password.Change {
     ///
     /// > Important: Password changes require the current password to verify
     /// the user's identity.
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Changes the password for an authenticated user.
         ///
@@ -103,7 +101,7 @@ extension Identity.Password.Change {
         /// - Parameters:
         ///   - currentPassword: The user's current password
         ///   - newPassword: The new password to set
-        public var request: (_ currentPassword: String, _ newPassword: String) async throws -> Void
+        public var request: (_ currentPassword: String, _ newPassword: String) async throws(any Swift.Error) -> Void
     }
 }
 

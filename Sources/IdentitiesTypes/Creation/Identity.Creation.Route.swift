@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Creation {
     /// Complete routing for identity creation features including both API and View endpoints.

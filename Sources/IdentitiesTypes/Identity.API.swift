@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity {
     /// A comprehensive set of identity management API endpoints.

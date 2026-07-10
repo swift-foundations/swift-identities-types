@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 05/02/2025.
 //
 
-import TypesFoundation
+import CasePaths
+import URLRouting
 
 extension Identity {
     /// Namespace for reauthorization functionality within the Identity system.

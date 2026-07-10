@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import URLRouting
 
 extension Identity {
     /// Namespace for MFA-related functionality within the Identity system.

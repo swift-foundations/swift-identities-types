@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Password.Reset {
     /// Password reset API endpoints.

@@ -5,13 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
 //
 
-import DependenciesMacros
+import Dependencies
 import JWT
-import TypesFoundation
+import URLRouting
 
 extension Identity.Reauthorization {
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
-        public var reauthorize: (_ password: String) async throws -> JWT
+        public var reauthorize: (_ password: String) async throws(any Swift.Error) -> JWT
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import EmailAddress
 import Foundation
 
@@ -32,7 +31,7 @@ extension Identity.Deletion {
     /// // or
     /// try await client.cancel()  // Cancels deletion request
     /// ```
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Initiates the identity deletion process.
         ///
@@ -45,14 +44,14 @@ extension Identity.Deletion {
         public var request:
             (
                 _ reauthToken: String
-            ) async throws -> Void
+            ) async throws(any Swift.Error) -> Void
 
         /// Cancels a pending identity deletion request.
         ///
         /// This method:
         /// 1. Removes the pending deletion status
         /// 2. Restores the identity to normal operation
-        public var cancel: () async throws -> Void
+        public var cancel: () async throws(any Swift.Error) -> Void
 
         /// Confirms and executes identity deletion.
         ///
@@ -63,7 +62,7 @@ extension Identity.Deletion {
         /// 1. Verifies the deletion request is still valid
         /// 2. Permanently deletes the identity and all associated data
         /// 3. Invalidates all authentication tokens
-        public var confirm: () async throws -> Void
+        public var confirm: () async throws(any Swift.Error) -> Void
     }
 }
 

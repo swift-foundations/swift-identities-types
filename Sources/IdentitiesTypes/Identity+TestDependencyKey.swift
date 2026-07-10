@@ -1,5 +1,5 @@
 //
-//  Identity+TestDependencyKey.swift
+//  Identity+Dependency.Key.Test.swift
 //  swift-identities-types
 //
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
@@ -7,7 +7,7 @@
 
 import Dependencies
 
-extension Identity: TestDependencyKey {
+extension Identity: Dependency.Key.Test {
     public static var testValue: Self {
         return Self(
             authenticate: .testValue,

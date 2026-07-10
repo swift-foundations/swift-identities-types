@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import TypesFoundation
+import URLRouting
 
 extension Identity.MFA {
     /// Email-specific types and operations.

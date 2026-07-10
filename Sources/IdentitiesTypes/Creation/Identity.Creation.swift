@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 28/01/2025.
 //
 
-import TypesFoundation
+import EmailAddress
+import URLRouting
 
 extension Identity {
     /// Namespace for identity creation functionality within the Identity system.

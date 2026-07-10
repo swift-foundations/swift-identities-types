@@ -248,7 +248,8 @@ extension Identity._TestDatabase {
     }
 }
 //
-extension Identity._TestDatabase: TestDependencyKey {
+extension Identity._TestDatabase: Witness.Key {
+    package static let liveValue: Identity._TestDatabase = .init()
     package static let testValue: Identity._TestDatabase = .init()
     package static let testValue2: Identity._TestDatabase = .init()
 }

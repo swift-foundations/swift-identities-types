@@ -5,7 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
 //
 
-import TypesFoundation
+import EmailAddress
+import URLRouting
+import URLFormCodingURLRouting
 
 extension Identity.Email.Change {
     /// A request to change a user's email address.

@@ -48,7 +48,7 @@
 //    /// - ``email`` for email management
 //    /// - ``password`` for password operations
 //    /// - ``delete`` for identity deletion
-//    @DependencyClient
+//    @Witness
 //    public struct Client: @unchecked Sendable {
 //        /// Interface for all authentication-related operations
 //        public var authenticate: Identity.Authentication.Client = .init()

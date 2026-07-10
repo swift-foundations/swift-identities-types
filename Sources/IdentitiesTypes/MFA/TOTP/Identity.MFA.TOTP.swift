@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import TypesFoundation
+import Foundation
+import URLRouting
 
 extension Identity.MFA {
     /// TOTP-specific types and operations.

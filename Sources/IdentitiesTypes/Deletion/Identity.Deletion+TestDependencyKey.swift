@@ -1,5 +1,5 @@
 //
-//  Identity.Deletion+TestDependencyKey.swift
+//  Identity.Deletion+Dependency.Key.Test.swift
 //  swift-identities-types
 //
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
@@ -7,7 +7,7 @@
 
 import Dependencies
 
-extension Identity.Deletion: TestDependencyKey {
+extension Identity.Deletion: Dependency.Key.Test {
     public static var testValue: Self {
         @Dependency(Identity._TestDatabase.self) var database
 

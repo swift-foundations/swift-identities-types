@@ -5,7 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 10/09/2025.
 //
 
-import TypesFoundation
+import EmailAddress
+import Foundation
+import URLRouting
 
 extension Identity {
     /// Namespace for OAuth-related functionality within the Identity system.

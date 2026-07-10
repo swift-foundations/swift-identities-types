@@ -5,136 +5,136 @@
 //  Created by Coen ten Thije Boonkkamp on 28/01/2025.
 //
 
-import TypesFoundation
+import URLRouting
 
 extension Path<PathBuilder.Component<String>> {
 
-    public static let request = Path {
+    public static var request: Path<PathBuilder.Component<String>> { Path {
         "request"
-    }
+    } }
 
-    public static let api = Path {
+    public static var api: Path<PathBuilder.Component<String>> { Path {
         "api"
-    }
+    } }
 
-    public static let apiKey = Path {
+    public static var apiKey: Path<PathBuilder.Component<String>> { Path {
         "api-key"
-    }
+    } }
 
-    public static let verify = Path {
+    public static var verify: Path<PathBuilder.Component<String>> { Path {
         "verify"
-    }
+    } }
 
-    public static let refresh = Path {
+    public static var refresh: Path<PathBuilder.Component<String>> { Path {
         "refresh"
-    }
+    } }
 
-    public static let access = Path {
+    public static var access: Path<PathBuilder.Component<String>> { Path {
         "access"
-    }
+    } }
 
-    public static let cancel = Path {
+    public static var cancel: Path<PathBuilder.Component<String>> { Path {
         "cancel"
-    }
+    } }
 
-    public static let confirm = Path {
+    public static var confirm: Path<PathBuilder.Component<String>> { Path {
         "confirm"
-    }
+    } }
 
-    public static let reauthorization = Path {
+    public static var reauthorization: Path<PathBuilder.Component<String>> { Path {
         "reauthorization"
-    }
+    } }
 
-    public static let reauthorize = Path {
+    public static var reauthorize: Path<PathBuilder.Component<String>> { Path {
         "reauthorize"
-    }
+    } }
 
-    public static let create = Path {
+    public static var create: Path<PathBuilder.Component<String>> { Path {
         "create"
-    }
+    } }
 
-    public static let authenticate = Path {
+    public static var authenticate: Path<PathBuilder.Component<String>> { Path {
         "authenticate"
-    }
-    public static let update = Path {
+    } }
+    public static var update: Path<PathBuilder.Component<String>> { Path {
         "update"
-    }
-    public static let delete = Path {
+    } }
+    public static var delete: Path<PathBuilder.Component<String>> { Path {
         "delete"
-    }
-    public static let login = Path {
+    } }
+    public static var login: Path<PathBuilder.Component<String>> { Path {
         "login"
-    }
-    public static let credentials = Path {
+    } }
+    public static var credentials: Path<PathBuilder.Component<String>> { Path {
         "credentials"
-    }
-    public static let logout = Path {
+    } }
+    public static var logout: Path<PathBuilder.Component<String>> { Path {
         "logout"
-    }
-    public static let password = Path {
+    } }
+    public static var password: Path<PathBuilder.Component<String>> { Path {
         "password"
-    }
-    public static let email = Path {
+    } }
+    public static var email: Path<PathBuilder.Component<String>> { Path {
         "email"
-    }
-    public static let change = Path {
+    } }
+    public static var change: Path<PathBuilder.Component<String>> { Path {
         "change"
-    }
-    public static let verification = Path {
+    } }
+    public static var verification: Path<PathBuilder.Component<String>> { Path {
         "verification"
-    }
-    public static let reset = Path {
+    } }
+    public static var reset: Path<PathBuilder.Component<String>> { Path {
         "reset"
-    }
+    } }
 
-    public static let mfa = Path {
+    public static var mfa: Path<PathBuilder.Component<String>> { Path {
         "reset"
-    }
+    } }
 
-    public static let oauth = Path {
+    public static var oauth: Path<PathBuilder.Component<String>> { Path {
         "reset"
-    }
+    } }
 }
 
 // MFA specific
 extension Path<PathBuilder.Component<String>> {
-    public static let setup = Path {
+    public static var setup: Path<PathBuilder.Component<String>> { Path {
         "setup"
-    }
+    } }
 
-    public static let initialize = Path {
+    public static var initialize: Path<PathBuilder.Component<String>> { Path {
         "initialize"
-    }
+    } }
 
-    public static let challenge = Path {
+    public static var challenge: Path<PathBuilder.Component<String>> { Path {
         "challenge"
-    }
+    } }
 
-    public static let recovery = Path {
+    public static var recovery: Path<PathBuilder.Component<String>> { Path {
         "recovery"
-    }
+    } }
 
-    public static let generate = Path {
+    public static var generate: Path<PathBuilder.Component<String>> { Path {
         "generate"
-    }
+    } }
 
-    public static let count = Path {
+    public static var count: Path<PathBuilder.Component<String>> { Path {
         "count"
-    }
+    } }
 
-    public static let configuration = Path {
+    public static var configuration: Path<PathBuilder.Component<String>> { Path {
         "configuration"
-    }
+    } }
 
-    public static let disable = Path {
+    public static var disable: Path<PathBuilder.Component<String>> { Path {
         "disable"
-    }
+    } }
 
-    public static let multifactor = Path {
+    public static var multifactor: Path<PathBuilder.Component<String>> { Path {
         "multifactor"
-    }
+    } }
 
-    public static let manage = Path {
+    public static var manage: Path<PathBuilder.Component<String>> { Path {
         "manage"
-    }
+    } }
 }

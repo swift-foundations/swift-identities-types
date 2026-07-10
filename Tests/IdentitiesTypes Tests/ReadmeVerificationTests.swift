@@ -7,7 +7,8 @@
 //
 
 import Dependencies
-import DependenciesTestSupport
+import Dependencies_Test_Support
+import Foundation
 import JWT
 import Testing
 
@@ -331,7 +332,8 @@ struct ReadmeVerificationTests {
 
     @Test("README lines 216-236: Type-safe URL routing")
     func testTypesSafeRouting() throws {
-        @Dependency(\.identity.router) var router
+        @Dependency(\.identity) var identity
+        let router = identity.router
 
         // Generate URL for login API
         let api: Identity.API = .authenticate(

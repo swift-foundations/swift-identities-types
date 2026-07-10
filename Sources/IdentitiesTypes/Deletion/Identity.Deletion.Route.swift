@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Deletion {
     /// Complete routing for identity deletion features including both API and View endpoints.

@@ -12,7 +12,7 @@ extension Identity.Authentication {
     ///
     /// This error is thrown when credentials are valid but the account has MFA enabled,
     /// requiring an additional verification step.
-    public struct MFARequired: Error, Codable, Sendable {
+    public struct MFARequired: Swift.Error, Codable, Sendable {
         /// Session token for the MFA challenge
         public let sessionToken: String
 

@@ -7,7 +7,8 @@
 
 import CasePaths
 import Foundation
-import TypesFoundation
+import URLRouting
+import URLFormCodingURLRouting
 
 extension Identity.MFA.TOTP {
     /// TOTP (Time-based One-Time Password) operations.

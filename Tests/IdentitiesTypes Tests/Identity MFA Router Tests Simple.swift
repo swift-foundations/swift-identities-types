@@ -5,9 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 20/02/2025.
 //
 
-import Authenticating
 import Dependencies
-import DependenciesTestSupport
+import Dependencies_Test_Support
 import EmailAddress
 import Foundation
 import Testing

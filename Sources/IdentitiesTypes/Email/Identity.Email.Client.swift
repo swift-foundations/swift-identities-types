@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import EmailAddress
 import Foundation
 
@@ -19,7 +18,7 @@ extension Identity.Email.Change {
     ///
     /// > Important: Email changes require verification to prevent unauthorized changes
     /// and ensure the new email is valid and accessible.
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Initiates an email change request.
         ///
@@ -31,7 +30,7 @@ extension Identity.Email.Change {
         /// - Parameter newEmail: The new email address to change to
         /// - Returns: The result of the change request, indicating success or if re-authentication is required
         public var request:
-            (_ newEmail: String) async throws -> Identity.Email.Change.Request.Result
+            (_ newEmail: String) async throws(any Swift.Error) -> Identity.Email.Change.Request.Result
 
         /// Confirms an email change with a verification token.
         ///
@@ -43,7 +42,7 @@ extension Identity.Email.Change {
         /// - Parameter token: The verification token from the confirmation email
         /// - Returns: Response containing updated authentication information
         public var confirm:
-            (_ token: String) async throws -> Identity.Email.Change.Confirmation.Response
+            (_ token: String) async throws(any Swift.Error) -> Identity.Email.Change.Confirmation.Response
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  Identity.Email+TestDependencyKey.swift
+//  Identity.Email+Dependency.Key.Test.swift
 //  swift-identities-types
 //
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
@@ -8,7 +8,7 @@
 import Dependencies
 import EmailAddress
 
-extension Identity.Email: TestDependencyKey {
+extension Identity.Email: Dependency.Key.Test {
     public static var testValue: Self {
         return Self(
             change: .testValue
@@ -16,7 +16,7 @@ extension Identity.Email: TestDependencyKey {
     }
 }
 
-extension Identity.Email.Change: TestDependencyKey {
+extension Identity.Email.Change: Dependency.Key.Test {
     public static var testValue: Self {
         @Dependency(Identity._TestDatabase.self) var database
 

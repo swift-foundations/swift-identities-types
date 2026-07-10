@@ -5,7 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
 //
 
-import TypesFoundation
+import URLRouting
+import URLFormCodingURLRouting
 
 extension Identity.Password.Reset {
     /// Confirmation data for completing a password reset.

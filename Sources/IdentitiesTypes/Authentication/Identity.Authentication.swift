@@ -5,9 +5,10 @@
 //  Created by Coen ten Thije Boonkkamp on 28/01/2025.
 //
 
-import Authenticating
-import DependenciesMacros
-import TypesFoundation
+import CasePaths
+import Dependencies
+import EmailAddress
+import URLRouting
 
 extension Identity {
     /// Authentication namespace containing all authentication-related types and operations.
@@ -15,16 +16,15 @@ extension Identity {
     /// This namespace follows the domain-first pattern where the business capability
     /// (Authenticate) is primary, with technical implementations (Client, API, Route)
     /// as nested types.
-    @DependencyClient
     public struct Authentication: @unchecked Sendable {
         public var client: Identity.Authentication.Client
         public var router: any URLRouting.Router<Identity.Authentication.Route>
         public var token: Identity.Authentication.Token.Client
 
         public init(
-            client: Identity.Authentication.Client,
-            router: any URLRouting.Router<Identity.Authentication.Route>,
-            token: Identity.Authentication.Token.Client
+            client: Identity.Authentication.Client = .unimplemented(),
+            router: any URLRouting.Router<Identity.Authentication.Route> = Identity.Authentication.Route.Router(),
+            token: Identity.Authentication.Token.Client = .unimplemented()
         ) {
             self.client = client
             self.router = router

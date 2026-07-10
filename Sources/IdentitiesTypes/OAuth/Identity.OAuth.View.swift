@@ -7,7 +7,7 @@
 
 import CasePaths
 import Foundation
-import TypesFoundation
+import URLRouting
 
 extension Identity.View {
     /// OAuth view routes for UI pages

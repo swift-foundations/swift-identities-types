@@ -7,7 +7,7 @@
 
 import CasePaths
 import Foundation
-import TypesFoundation
+import URLRouting
 
 extension Identity.Email {
     /// Email management endpoints for handling email address updates.

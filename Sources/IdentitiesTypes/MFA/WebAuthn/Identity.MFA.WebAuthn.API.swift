@@ -7,7 +7,7 @@
 
 import CasePaths
 import Foundation
-import TypesFoundation
+import URLRouting
 
 extension Identity.MFA.WebAuthn {
     /// WebAuthn/FIDO2 authentication operations.

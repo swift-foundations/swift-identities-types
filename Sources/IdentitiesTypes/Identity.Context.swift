@@ -9,6 +9,7 @@
 import EmailAddress
 import Foundation
 import JWT
+import Tagged_Primitives
 
 extension Identity {
     /// Context object providing access to identity information
@@ -24,7 +25,7 @@ extension Identity {
             else {
                 fatalError("Invalid token subject - missing or malformed identity ID")
             }
-            return Identity.ID(id)
+            return Identity.ID(_unchecked: id)
         }
 
         /// The authenticated identity's email address

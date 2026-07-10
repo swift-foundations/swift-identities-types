@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import Foundation
 
 extension Identity.MFA {
@@ -50,7 +49,7 @@ extension Identity.MFA {
             email: Identity.MFA.Email.Client? = nil,
             webauthn: Identity.MFA.WebAuthn.Client? = nil,
             backupCodes: Identity.MFA.BackupCodes.Client? = nil,
-            status: Identity.MFA.Status.Client = .init()
+            status: Identity.MFA.Status.Client = .unimplemented()
         ) {
             self.totp = totp
             self.sms = sms

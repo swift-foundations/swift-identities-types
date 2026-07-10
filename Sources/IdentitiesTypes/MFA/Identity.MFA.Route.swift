@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.MFA {
     /// Complete routing for MFA features including both API and View endpoints.

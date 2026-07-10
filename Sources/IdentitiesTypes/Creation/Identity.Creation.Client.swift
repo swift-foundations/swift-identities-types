@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import EmailAddress
 import Foundation
 
@@ -33,7 +32,7 @@ extension Identity.Creation {
     ///     token: "verification_token"
     /// )
     /// ```
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Initiates the identity creation process.
         ///
@@ -46,8 +45,7 @@ extension Identity.Creation {
         ///   - email: The email address for the new identity
         ///   - password: The password for the new identity
         /// - Throws: Creation errors if the email is invalid or already in use
-        @DependencyEndpoint
-        public var request: (_ email: String, _ password: String) async throws -> Void
+        public var request: (_ email: String, _ password: String) async throws(any Swift.Error) -> Void
 
         /// Verifies an email address to complete identity creation.
         ///
@@ -60,8 +58,7 @@ extension Identity.Creation {
         ///   - email: The email address being verified
         ///   - token: The verification token from the email
         /// - Throws: Verification errors if the token is invalid or expired
-        @DependencyEndpoint
-        public var verify: (_ email: String, _ token: String) async throws -> Void
+        public var verify: (_ email: String, _ token: String) async throws(any Swift.Error) -> Void
     }
 }
 

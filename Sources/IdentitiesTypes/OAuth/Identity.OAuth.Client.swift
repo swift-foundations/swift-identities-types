@@ -6,66 +6,56 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import Foundation
 
 extension Identity.OAuth {
     /// OAuth authentication client for managing OAuth provider integrations
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Register an OAuth provider
-        @DependencyEndpoint
-        public var registerProvider: (any Identity.OAuth.Provider) async throws -> Void
+        public var registerProvider: (any Identity.OAuth.Provider) async throws(any Swift.Error) -> Void
 
         /// Get a registered OAuth provider by identifier
-        @DependencyEndpoint
-        public var provider: (_ identifier: String) async throws -> (any Identity.OAuth.Provider)?
+        public var provider: (_ identifier: String) async throws(any Swift.Error) -> (any Identity.OAuth.Provider)?
 
         /// Get all registered OAuth providers
-        @DependencyEndpoint
-        public var providers: () async throws -> [any Identity.OAuth.Provider]
+        public var providers: () async throws(any Swift.Error) -> [any Identity.OAuth.Provider]
 
         /// Generate authorization URL for OAuth flow
-        @DependencyEndpoint
         public var authorizationURL:
             (
                 _ provider: String,
                 _ redirectURI: String
-            ) async throws -> URL
+            ) async throws(any Swift.Error) -> URL
 
         /// Handle OAuth callback and exchange code for tokens
-        @DependencyEndpoint
         public var callback:
             (
                 _ callbackRequest: Identity.OAuth.CallbackRequest
-            ) async throws -> Identity.Authentication.Response
+            ) async throws(any Swift.Error) -> Identity.Authentication.Response
 
         /// Get OAuth connection for current identity
-        @DependencyEndpoint
         public var connection:
             (
                 _ provider: String
-            ) async throws -> Identity.OAuth.Connection?
+            ) async throws(any Swift.Error) -> Identity.OAuth.Connection?
 
         /// Disconnect OAuth provider
-        @DependencyEndpoint
         public var disconnect:
             (
                 _ provider: String
-            ) async throws -> Void
+            ) async throws(any Swift.Error) -> Void
 
         /// Get a valid OAuth access token for API usage
         /// This method handles token refresh automatically if supported by provider
         /// Returns nil if provider doesn't store tokens or token unavailable
-        @DependencyEndpoint
         public var getValidToken:
             (
                 _ provider: String
-            ) async throws -> String?
+            ) async throws(any Swift.Error) -> String?
 
         /// Get all OAuth connections for current identity
-        @DependencyEndpoint
-        public var getAllConnections: () async throws -> [Identity.OAuth.Connection]
+        public var getAllConnections: () async throws(any Swift.Error) -> [Identity.OAuth.Connection]
 
     }
 }

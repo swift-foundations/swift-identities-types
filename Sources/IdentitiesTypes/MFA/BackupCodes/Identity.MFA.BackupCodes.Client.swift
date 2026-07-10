@@ -6,18 +6,16 @@
 //
 
 import Dependencies
-import DependenciesMacros
 import Foundation
 
 extension Identity.MFA.BackupCodes {
     /// Backup codes client operations.
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Regenerate backup codes.
         ///
         /// Returns a new set of single-use backup codes.
-        @DependencyEndpoint
-        public var regenerate: () async throws -> [String]
+        public var regenerate: () async throws(any Swift.Error) -> [String]
 
         /// Verify a backup code during authentication.
         ///
@@ -25,15 +23,13 @@ extension Identity.MFA.BackupCodes {
         ///   - code: The backup code
         ///   - sessionToken: The MFA session token from initial authentication
         /// - Returns: Full authentication response with access and refresh tokens
-        @DependencyEndpoint
         public var verify:
             (
                 _ code: String,
                 _ sessionToken: String
-            ) async throws -> Identity.Authentication.Response
+            ) async throws(any Swift.Error) -> Identity.Authentication.Response
 
         /// Get count of remaining backup codes.
-        @DependencyEndpoint
-        public var remaining: () async throws -> Int
+        public var remaining: () async throws(any Swift.Error) -> Int
     }
 }

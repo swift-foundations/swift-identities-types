@@ -6,8 +6,7 @@
 //
 import CasePaths
 import Dependencies
-import DependenciesMacros
-import TypesFoundation
+import URLRouting
 
 /// A namespace for managing identity and authentication in a client-server architecture.
 ///
@@ -28,7 +27,6 @@ import TypesFoundation
 ///   password: "password123"
 /// )
 /// ```
-@DependencyClient
 public struct Identity: @unchecked Sendable {
     /// Interface for all authentication-related operations
     public var authenticate: Identity.Authentication
@@ -41,6 +39,9 @@ public struct Identity: @unchecked Sendable {
     /// - Parameter password: The user's current password
     /// - Returns: A JWT token for the re-authenticated session
     public var reauthorize: Identity.Reauthorization
+
+    /// Requires an authenticated identity context or throws if not authenticated
+    public var require: @Sendable () async throws(any Swift.Error) -> Identity.Context
 
     /// Interface for identity creation operations
     public var create: Identity.Creation
@@ -64,14 +65,11 @@ public struct Identity: @unchecked Sendable {
 
     public var router: any URLRouting.Router<Identity.Route>
 
-    /// Requires an authenticated identity context or throws if not authenticated
-    public var require: @Sendable () async throws -> Identity.Context
-
     public init(
         authenticate: Identity.Authentication,
         logout: Identity.Logout,
         reauthorize: Identity.Reauthorization,
-        require: @escaping @Sendable () async throws -> Identity.Context,
+        require: @escaping @Sendable () async throws(any Swift.Error) -> Identity.Context,
         create: Identity.Creation,
         delete: Identity.Deletion,
         email: Identity.Email,
@@ -94,7 +92,7 @@ public struct Identity: @unchecked Sendable {
     }
 }
 
-extension DependencyValues {
+extension Dependency.Values {
     public var identity: Identity {
         get { self[Identity.self] }
         set { self[Identity.self] = newValue }

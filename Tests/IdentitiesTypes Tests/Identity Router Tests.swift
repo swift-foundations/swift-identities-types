@@ -5,9 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 20/02/2025.
 //
 
-import Authenticating
 import Dependencies
-import DependenciesTestSupport
+import Dependencies_Test_Support
 import EmailAddress
 import Foundation
 import Testing
@@ -17,7 +16,10 @@ import Testing
 @Suite("Identity API Router Tests")
 struct IdentityAPIRouterTests {
 
-    @Dependency(\.identity.router) var router
+    var router: any URLRouting.Router<Identity.Route> {
+        @Dependency(\.identity) var identity
+        return identity.router
+    }
 
     @Test("Creates correct URL for authenticate credentials")
     func testAuthenticateCredentialsURL() throws {

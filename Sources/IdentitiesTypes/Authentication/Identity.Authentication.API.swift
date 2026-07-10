@@ -5,11 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 07/02/2025.
 //
 
-import Authenticating
 import CasePaths
 import Foundation
 import JWT
-import TypesFoundation
+import URLRouting
+import URLFormCodingURLRouting
 
 extension Identity.Authentication {
     /// Authentication endpoints for managing user sessions and access.

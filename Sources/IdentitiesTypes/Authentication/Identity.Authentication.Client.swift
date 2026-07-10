@@ -5,10 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 12/02/2025.
 //
 
-import Authenticating
-import DependenciesMacros
+import Dependencies
 import JWT
-import TypesFoundation
+import URLRouting
 
 extension Identity.Authentication {
     /// A client interface for handling user authentication operations.
@@ -28,7 +27,7 @@ extension Identity.Authentication {
     ///     password: "password123"
     /// )
     /// ```
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Authenticates a user with username and password credentials.
         ///
@@ -37,23 +36,21 @@ extension Identity.Authentication {
         ///   - password: The user's password
         /// - Returns: An authentication response containing access and refresh tokens
         /// - Throws: Authentication errors if credentials are invalid
-        @DependencyEndpoint
         public var credentials:
             (
                 _ username: String,
                 _ password: String
-            ) async throws -> Identity.Authentication.Response
+            ) async throws(any Swift.Error) -> Identity.Authentication.Response
 
         /// Authenticates a user with an API key.
         ///
         /// - Parameter apiKey: The API key to authenticate with
         /// - Returns: An authentication response containing access and refresh tokens
         /// - Throws: Authentication errors if the API key is invalid
-        @DependencyEndpoint
         public var apiKey:
             (
                 _ apiKey: String
-            ) async throws -> Identity.Authentication.Response
+            ) async throws(any Swift.Error) -> Identity.Authentication.Response
     }
 }
 
@@ -63,7 +60,7 @@ extension Identity.Authentication.Token {
     /// Provides functionality for:
     /// - Validating access tokens
     /// - Refreshing expired tokens
-    @DependencyClient
+    @Witness
     public struct Client: @unchecked Sendable {
         /// Validates an access token.
         ///
@@ -72,7 +69,7 @@ extension Identity.Authentication.Token {
         public var access:
             (
                 _ token: String
-            ) async throws -> Void
+            ) async throws(any Swift.Error) -> Void
 
         /// Refreshes an expired token.
         ///
@@ -82,7 +79,7 @@ extension Identity.Authentication.Token {
         public var refresh:
             (
                 _ token: String
-            ) async throws -> Identity.Authentication.Response
+            ) async throws(any Swift.Error) -> Identity.Authentication.Response
     }
 }
 

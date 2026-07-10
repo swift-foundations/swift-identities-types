@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Deletion {
     /// Identity deletion endpoints with a multi-step confirmation process for safety.

@@ -5,10 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
 //
 
-import Authenticating
-import DependenciesMacros
 import JWT
-import TypesFoundation
+import URLRouting
 
 extension Identity.Authentication {
     /// Types of authentication tokens supported by the system.

@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Email {
     /// Complete routing for email management features including both API and View endpoints.

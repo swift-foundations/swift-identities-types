@@ -6,7 +6,7 @@
 //
 
 import CasePaths
-import TypesFoundation
+import URLRouting
 
 extension Identity.Password {
     /// Complete routing for password-related features including both API and View endpoints.
