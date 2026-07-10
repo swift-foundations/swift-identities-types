@@ -46,7 +46,7 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-url-form-coding.git", branch: "main"),
         // TRANSITIONAL third-party debt: no institute equivalent yet (see MANIFEST/report).
-        .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.7.2"),
+        .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "1.7.2"),
         .package(url: "https://github.com/swift-foundations/swift-url-routing.git", from: "0.6.0")
     ],
     targets: [
