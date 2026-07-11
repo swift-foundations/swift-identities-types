@@ -5,7 +5,7 @@
 //  Feature-based routing system for identity management
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity {
@@ -29,8 +29,7 @@ extension Identity {
     /// let route = Identity.Route.create(.api(.request(...)))
     /// let viewRoute = Identity.Route.password(.view(.reset(.request)))
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         /// Identity creation and verification
         case create(Creation.Route)
@@ -82,47 +81,47 @@ extension Identity.Route {
         public var body: some URLRouting.Router<Identity.Route> {
             OneOf {
                 // Create feature routes
-                URLRouting.Route(.case(Identity.Route.create)) {
+                URLRouting.Route(.case(Identity.Route.cases.create)) {
                     Identity.Creation.Route.Router()
                 }
 
                 // Authenticate feature routes
-                URLRouting.Route(.case(Identity.Route.authenticate)) {
+                URLRouting.Route(.case(Identity.Route.cases.authenticate)) {
                     Identity.Authentication.Route.Router()
                 }
 
                 // Delete feature routes
-                URLRouting.Route(.case(Identity.Route.delete)) {
+                URLRouting.Route(.case(Identity.Route.cases.delete)) {
                     Identity.Deletion.Route.Router()
                 }
 
                 //                 Email feature routes
-                URLRouting.Route(.case(Identity.Route.email)) {
+                URLRouting.Route(.case(Identity.Route.cases.email)) {
                     Identity.Email.Route.Router()
                 }
                 //
                 // Password feature routes
-                URLRouting.Route(.case(Identity.Route.password)) {
+                URLRouting.Route(.case(Identity.Route.cases.password)) {
                     Identity.Password.Route.Router()
                 }
 
                 // MFA feature routes (optional)
-                URLRouting.Route(.case(Identity.Route.mfa)) {
+                URLRouting.Route(.case(Identity.Route.cases.mfa)) {
                     Identity.MFA.Route.Router()
                 }
 
                 // Logout endpoint
-                URLRouting.Route(.case(Identity.Route.logout)) {
+                URLRouting.Route(.case(Identity.Route.cases.logout)) {
                     Identity.Logout.Route.Router()
                 }
 
                 // Reauthorization endpoint
-                URLRouting.Route(.case(Identity.Route.reauthorize)) {
+                URLRouting.Route(.case(Identity.Route.cases.reauthorize)) {
                     Identity.Reauthorization.Route.Router()
                 }
 
                 // OAuth feature routes (optional)
-                URLRouting.Route(.case(Identity.Route.oauth)) {
+                URLRouting.Route(.case(Identity.Route.cases.oauth)) {
                     Identity.OAuth.Route.Router()
                 }
             }

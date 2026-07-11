@@ -5,15 +5,14 @@
 //  Feature-based routing for Authentication functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Authentication {
     /// View routes for authentication pages.
     ///
     /// Provides frontend routes for different authentication methods.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum View: Sendable, Hashable, Codable {
         /// Credentials-based login page (username/password)
         case credentials
@@ -36,17 +35,17 @@ extension Identity.Authentication.View {
         public var body: some URLRouting.Router<Identity.Authentication.View> {
             // Support both /login and /credentials paths
             OneOf {
-                URLRouting.Route(.case(Identity.Authentication.View.credentials)) {
+                URLRouting.Route(.case(Identity.Authentication.View.cases.credentials)) {
                     Path { "login" }
                 }
 
-                URLRouting.Route(.case(Identity.Authentication.View.credentials)) {
+                URLRouting.Route(.case(Identity.Authentication.View.cases.credentials)) {
                     Path { "credentials" }
                 }
             }
 
             // Future auth methods would be added here:
-            // URLRouting.Route(.case(Identity.Authentication.View.oauth)) {
+            // URLRouting.Route(.case(Identity.Authentication.View.cases.oauth)) {
             //     Path { "oauth" }
             //     OAuthProvider.Router()
             // }

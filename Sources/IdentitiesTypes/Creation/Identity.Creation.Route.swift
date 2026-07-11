@@ -5,7 +5,7 @@
 //  Feature-based routing for Create functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Creation {
@@ -20,8 +20,7 @@ extension Identity.Creation {
     /// let route = Identity.Creation.Route.api(.request(...))
     /// let viewRoute = Identity.Creation.Route.view(.request)
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         /// API endpoints for creation operations
         case api(Identity.Creation.API)
@@ -43,14 +42,14 @@ extension Identity.Creation.Route {
         public var body: some URLRouting.Router<Identity.Creation.Route> {
             OneOf {
                 // API routes under /api prefix
-                URLRouting.Route(.case(Identity.Creation.Route.api)) {
+                URLRouting.Route(.case(Identity.Creation.Route.cases.api)) {
                     Path { "api" }
                     Path { "create" }
                     Identity.Creation.API.Router()
                 }
 
                 // View routes (no /api prefix)
-                URLRouting.Route(.case(Identity.Creation.Route.view)) {
+                URLRouting.Route(.case(Identity.Creation.Route.cases.view)) {
                     Path { "create" }
                     Identity.Creation.View.Router()
                 }

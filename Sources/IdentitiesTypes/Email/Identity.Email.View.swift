@@ -5,22 +5,20 @@
 //  Feature-based routing for Email functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Email {
     /// View routes for email management pages.
     ///
     /// Provides frontend routes for email-related operations.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum View: Equatable, Sendable {
         /// Email change flow views
         case change(Change)
 
         /// Email change view endpoints
-        @CasePathable
-        @dynamicMemberLookup
+        @Cases
         public enum Change: Equatable, Sendable {
             /// Email change request page
             case request
@@ -45,7 +43,7 @@ extension Identity.Email.View {
         public init() {}
 
         public var body: some URLRouting.Router<Identity.Email.View> {
-            URLRouting.Route(.case(Identity.Email.View.change)) {
+            URLRouting.Route(.case(Identity.Email.View.cases.change)) {
                 Path { "change" }
                 Identity.Email.View.Change.Router()
             }
@@ -65,16 +63,16 @@ extension Identity.Email.View.Change {
 
         public var body: some URLRouting.Router<Identity.Email.View.Change> {
             OneOf {
-                URLRouting.Route(.case(Identity.Email.View.Change.request)) {
+                URLRouting.Route(.case(Identity.Email.View.Change.cases.request)) {
                     Path { "request" }
                 }
 
-                URLRouting.Route(.case(Identity.Email.View.Change.confirm)) {
+                URLRouting.Route(.case(Identity.Email.View.Change.cases.confirm)) {
                     Path { "confirm" }
                     Identity.Email.Change.Confirmation.Router()
                 }
 
-                URLRouting.Route(.case(Identity.Email.View.Change.reauthorization))
+                URLRouting.Route(.case(Identity.Email.View.Change.cases.reauthorization))
             }
         }
     }

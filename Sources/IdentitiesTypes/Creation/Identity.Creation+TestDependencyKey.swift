@@ -23,7 +23,7 @@ extension Identity.Creation: Dependency.Key.Test {
                     try await database.verifyUser(email: email, token: token)
                 }
             ),
-            router: Identity.Creation.Route.Router()
+            router: Identity.Creation.Route.Router().eraseToAnyParserPrinter()
         )
     }
 }

@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 22/08/2025.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Logout {
@@ -13,8 +13,7 @@ extension Identity.Logout {
     ///
     /// Logout is a simple operation with just a single endpoint.
     /// It's typically accessed as a GET request that clears authentication.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         case api(Identity.Logout.API)
         case view
@@ -31,12 +30,12 @@ extension Identity.Logout.Route {
 
         public var body: some URLRouting.Router<Identity.Logout.Route> {
             OneOf {
-                URLRouting.Route(.case(Identity.Logout.Route.api)) {
+                URLRouting.Route(.case(Identity.Logout.Route.cases.api)) {
                     Path.logout
                     Identity.Logout.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.Logout.Route.view)) {
+                URLRouting.Route(.case(Identity.Logout.Route.cases.view)) {
                     Path.logout
                 }
             }

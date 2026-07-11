@@ -353,7 +353,7 @@ struct ReadmeVerificationTests {
         // Parse incoming request
         let match = try router.match(request: request)
         #expect(match.is(\.authenticate.api.credentials))
-        let credentials = match.authenticate?.api?.credentials
+        let credentials = Identity.Route.cases.authenticate.api.credentials.extract(match)
         #expect(credentials?.username == "user@example.com")
     }
 

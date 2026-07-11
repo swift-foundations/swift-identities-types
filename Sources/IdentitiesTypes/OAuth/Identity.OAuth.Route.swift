@@ -5,14 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 10/09/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
 extension Identity.OAuth {
     /// OAuth-specific routes
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         case api(Identity.OAuth.API)
         case view(Identity.View.OAuth)
@@ -27,14 +26,14 @@ extension Identity.OAuth.Route {
         public var body: some URLRouting.Router<Identity.OAuth.Route> {
             OneOf {
                 // API routes
-                URLRouting.Route(.case(Identity.OAuth.Route.api)) {
+                URLRouting.Route(.case(Identity.OAuth.Route.cases.api)) {
                     Path { "api" }
                     Path { "oauth" }
                     Identity.OAuth.API.Router()
                 }
 
                 // View routes
-                URLRouting.Route(.case(Identity.OAuth.Route.view)) {
+                URLRouting.Route(.case(Identity.OAuth.Route.cases.view)) {
                     Identity.View.OAuth.Router()
                 }
             }

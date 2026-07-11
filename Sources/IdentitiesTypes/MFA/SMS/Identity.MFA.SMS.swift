@@ -11,11 +11,11 @@ extension Identity.MFA {
     /// SMS-specific types and operations.
     public struct SMS: @unchecked Sendable {
         public var client: Identity.MFA.SMS.Client
-        public var router: any URLRouting.Router<Identity.MFA.SMS.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.SMS.API>
 
         public init(
             client: Identity.MFA.SMS.Client,
-            router: any URLRouting.Router<Identity.MFA.SMS.API> = Identity.MFA.SMS.API.Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.SMS.API> = Identity.MFA.SMS.API.Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

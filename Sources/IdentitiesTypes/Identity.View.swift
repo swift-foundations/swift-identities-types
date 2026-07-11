@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 07/10/2024.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity {
@@ -17,8 +17,7 @@ extension Identity {
     /// - Account creation and verification
     /// - Profile management (email, password)
     /// - Account deletion
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum View: Equatable, Sendable {
         case authenticate(Identity.Authentication.View)
         case create(Identity.Creation.View)
@@ -59,45 +58,45 @@ extension Identity.View {
         public var body: some URLRouting.Router<Identity.View> {
             OneOf {
 
-                URLRouting.Route(.case(Identity.View.create)) {
+                URLRouting.Route(.case(Identity.View.cases.create)) {
                     Path.create
                     // Delegate to the feature's view router
                     Identity.Creation.View.Router()
                 }
 
-                URLRouting.Route(.case(Identity.View.logout)) {
+                URLRouting.Route(.case(Identity.View.cases.logout)) {
                     Path.logout
                 }
 
-                URLRouting.Route(.case(Identity.View.delete)) {
+                URLRouting.Route(.case(Identity.View.cases.delete)) {
                     Path.delete
                     Identity.Deletion.View.Router()
                 }
 
-                URLRouting.Route(.case(Identity.View.password)) {
+                URLRouting.Route(.case(Identity.View.cases.password)) {
                     Path.password
                     // Delegate to the feature's view router
                     Identity.Password.View.Router()
                 }
 
-                URLRouting.Route(.case(Identity.View.email)) {
+                URLRouting.Route(.case(Identity.View.cases.email)) {
                     Path.email
                     // Delegate to the feature's view router
                     Identity.Email.View.Router()
                 }
 
-                URLRouting.Route(.case(Identity.View.mfa)) {
+                URLRouting.Route(.case(Identity.View.cases.mfa)) {
                     Path { "mfa" }
                     // Delegate to the feature's view router
                     Identity.MFA.View.Router()
                 }
 
-                URLRouting.Route(.case(Identity.View.oauth)) {
+                URLRouting.Route(.case(Identity.View.cases.oauth)) {
                     // Delegate to the feature's view router
                     Identity.View.OAuth.Router()
                 }
 
-                URLRouting.Route(.case(Identity.View.authenticate)) {
+                URLRouting.Route(.case(Identity.View.cases.authenticate)) {
                     // Delegate to the feature's view router
                     Identity.Authentication.View.Router()
                 }

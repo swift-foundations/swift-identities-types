@@ -14,8 +14,10 @@ extension Target.Dependency {
 extension Target.Dependency {
     static var jwt: Self { .product(name: "JWT", package: "swift-json-web-token") }
     static var emailAddress: Self { .product(name: "EmailAddress", package: "swift-emailaddress") }
-    static var casePaths: Self { .product(name: "CasePaths", package: "swift-case-paths") }
+    static var dual: Self { .product(name: "Dual", package: "swift-dual") }
+    static var rfc6750: Self { .product(name: "RFC 6750", package: "swift-rfc-6750") }
     static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
+    static var authenticating: Self { .product(name: "Authenticating", package: "swift-url-routing") }
     static var urlFormCoding: Self { .product(name: "URLFormCoding", package: "swift-url-form-coding") }
     static var urlFormCodingURLRouting: Self {
         .product(name: "URLFormCodingURLRouting", package: "swift-url-form-coding")
@@ -45,9 +47,9 @@ let package = Package(
         .package(url: "https://github.com/swift-foundations/swift-json-web-token.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-url-form-coding.git", branch: "main"),
-        // TRANSITIONAL third-party debt: no institute equivalent yet (see MANIFEST/report).
-        .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "1.7.2"),
-        .package(url: "https://github.com/swift-foundations/swift-url-routing.git", from: "0.6.0")
+        .package(url: "https://github.com/swift-foundations/swift-dual.git", branch: "main"),
+        .package(url: "https://github.com/swift-ietf/swift-rfc-6750.git", branch: "main"),
+        .package(url: "https://github.com/swift-foundations/swift-url-routing.git", branch: "main")
     ],
     targets: [
         .target(
@@ -56,8 +58,10 @@ let package = Package(
                 .dependencies,
                 .emailAddress,
                 .jwt,
-                .casePaths,
+                .dual,
+                .rfc6750,
                 .urlRouting,
+                .authenticating,
                 .urlFormCoding,
                 .urlFormCodingURLRouting,
                 .taggedPrimitives

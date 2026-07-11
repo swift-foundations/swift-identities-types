@@ -13,11 +13,11 @@ extension Identity {
     /// Namespace for OAuth-related functionality within the Identity system.
     public struct OAuth: @unchecked Sendable {
         public var client: Identity.OAuth.Client
-        public var router: any URLRouting.Router<Identity.OAuth.Route>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.OAuth.Route>
 
         public init(
             client: Identity.OAuth.Client,
-            router: any URLRouting.Router<Identity.OAuth.Route> = Identity.OAuth.Route.Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.OAuth.Route> = Identity.OAuth.Route.Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

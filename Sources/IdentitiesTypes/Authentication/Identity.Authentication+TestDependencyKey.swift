@@ -32,7 +32,7 @@ extension Identity.Authentication: Dependency.Key.Test {
                     )
                 }
             ),
-            router: Identity.Authentication.Route.Router(),
+            router: Identity.Authentication.Route.Router().eraseToAnyParserPrinter(),
             token: .init(
                 access: { token in
                     try await database.validateAccessToken(token)

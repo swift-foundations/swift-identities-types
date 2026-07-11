@@ -5,14 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
 extension Identity.MFA.WebAuthn {
     /// WebAuthn/FIDO2 authentication operations.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Initialize WebAuthn registration
         case beginRegistration
@@ -45,48 +44,48 @@ extension Identity.MFA.WebAuthn.API {
 
         public var body: some URLRouting.Router<Identity.MFA.WebAuthn.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.beginRegistration)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.beginRegistration)) {
                     Method.post
                     Path { "register" }
                     Path { "begin" }
                 }
 
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.finishRegistration)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.finishRegistration)) {
                     Method.post
                     Path { "register" }
                     Path { "finish" }
-                    Body(.json(Identity.MFA.WebAuthn.FinishRegistration.self))
+                    URLRouting.Body(.json(Identity.MFA.WebAuthn.FinishRegistration.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.beginAuthentication)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.beginAuthentication)) {
                     Method.post
                     Path { "authenticate" }
                     Path { "begin" }
                 }
 
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.finishAuthentication)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.finishAuthentication)) {
                     Method.post
                     Path { "authenticate" }
                     Path { "finish" }
-                    Body(.json(Identity.MFA.WebAuthn.FinishAuthentication.self))
+                    URLRouting.Body(.json(Identity.MFA.WebAuthn.FinishAuthentication.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.listCredentials)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.listCredentials)) {
                     Method.get
                     Path { "credentials" }
                 }
 
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.removeCredential)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.removeCredential)) {
                     Method.post
                     Path { "credentials" }
                     Path { "remove" }
-                    Body(.json(Identity.MFA.WebAuthn.RemoveCredential.self))
+                    URLRouting.Body(.json(Identity.MFA.WebAuthn.RemoveCredential.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.disable)) {
+                URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

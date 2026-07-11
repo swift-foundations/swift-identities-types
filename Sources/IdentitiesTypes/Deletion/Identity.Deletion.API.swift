@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 17/10/2024.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Deletion {
@@ -32,8 +32,7 @@ extension Identity.Deletion {
     ///
     /// > Important: Identity deletion is permanent and cannot be undone after confirmation.
     /// > Identities have a grace period between request and confirmation during which they can cancel.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Codable, Hashable, Sendable {
         /// Initiates identity deletion, requiring recent authentication
         case request(Identity.Deletion.Request)
@@ -71,17 +70,17 @@ extension Identity.Deletion.API {
         /// to ensure secure identity deletion.
         public var body: some URLRouting.Router<Identity.Deletion.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Deletion.API.request)) {
+                URLRouting.Route(.case(Identity.Deletion.API.cases.request)) {
                     Path<PathBuilder.Component<String>>.request
                     Identity.Deletion.Request.Router()
                 }
 
-                URLRouting.Route(.case(Identity.Deletion.API.cancel)) {
+                URLRouting.Route(.case(Identity.Deletion.API.cases.cancel)) {
                     Path.cancel
                     Method.post
                 }
 
-                URLRouting.Route(.case(Identity.Deletion.API.confirm)) {
+                URLRouting.Route(.case(Identity.Deletion.API.cases.confirm)) {
                     Path.confirm
                     Method.post
                 }

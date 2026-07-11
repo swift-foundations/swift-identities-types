@@ -5,9 +5,11 @@
 //  Created by Coen ten Thije Boonkkamp on 07/02/2025.
 //
 
-import CasePaths
+import Authenticating
+import Dual
 import Foundation
 import JWT
+import RFC_6750
 import URLRouting
 import URLFormCodingURLRouting
 
@@ -31,8 +33,7 @@ extension Identity.Authentication {
     /// // Authenticate with a refresh token
     /// let auth = Identity.Authentication.API.token(.refresh(bearerToken))
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Sendable, Hashable, Codable {
 
         /// Authenticates using username/password credentials
@@ -42,7 +43,7 @@ extension Identity.Authentication {
         case token(Token)
 
         /// Authenticates using an API key
-        case apiKey(BearerAuth)
+        case apiKey(RFC_6750.Bearer)
     }
 }
 
@@ -56,8 +57,7 @@ extension Identity.Authentication.API {
     /// Access tokens have shorter lifetimes but grant full API access, while
     /// refresh tokens have longer lifetimes but can only be used to obtain new
     /// access tokens.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Token: Codable, Hashable, Sendable {
         /// Authenticates using a JWT access token
         case access(JWT)
@@ -93,41 +93,31 @@ extension Identity.Authentication.API {
         /// - The request body format
         public var body: some URLRouting.Router<Identity.Authentication.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Authentication.API.credentials)) {
+                URLRouting.Route(.case(Identity.Authentication.API.cases.credentials)) {
                     Method.post
-                    Body(.form(Identity.Authentication.Credentials.self, decoder: .identities))
+                    URLRouting.Body(.form(Identity.Authentication.Credentials.self, decoder: .identities))
                 }
 
-                URLRouting.Route(.case(Identity.Authentication.API.token)) {
+                URLRouting.Route(.case(Identity.Authentication.API.cases.token)) {
                     Method.post
                     OneOf {
-                        URLRouting.Route(.case(Identity.Authentication.API.Token.access)) {
+                        URLRouting.Route(.case(Identity.Authentication.API.Token.cases.access)) {
                             Path.access
-                            OneOf {
-                                BearerAuth.Router().map(
-                                    .convert(
-                                        apply: { _ in
-                                            return nil
-                                            //                                            try? JWT.parse(from: $0.token)
-                                            //                                            JWT(value: $0.token)
-                                        },
-                                        // TO-DO: remove force unwrapping after https://github.com/pointfreeco/swift-parsing/pull/381
-                                        unapply: { (jwt: JWT) -> BearerAuth? in
-                                            return nil
-                                            //                                            try? BearerAuth(token: $0.compactSerialization)
-                                        }
-                                    )
-                                )
-                                Cookies {
-                                    Field("access_token", .utf8.data.json(JWT.self))
-                                }
+                            // The former Bearer-header alternative was dead code: its
+                            // `.convert` closures returned nil in BOTH directions, so the
+                            // branch never parsed nor printed (OneOf always fell through
+                            // to the cookie). branch:main's `.convert(apply:)` is total,
+                            // so the always-nil spelling no longer compiles; the branch is
+                            // deleted rather than migrated (behavior-preserving).
+                            Cookies {
+                                Field("access_token", .utf8.data.json(JWT.self))
                             }
                         }
 
-                        URLRouting.Route(.case(Identity.Authentication.API.Token.refresh)) {
+                        URLRouting.Route(.case(Identity.Authentication.API.Token.cases.refresh)) {
                             Path.refresh
                             OneOf {
-                                Body(.json(JWT.self))
+                                URLRouting.Body(.json(JWT.self))
 
                                 Cookies {
                                     Field("refresh_token", .utf8.data.json(JWT.self))
@@ -137,9 +127,9 @@ extension Identity.Authentication.API {
                     }
                 }
 
-                URLRouting.Route(.case(Identity.Authentication.API.apiKey)) {
+                URLRouting.Route(.case(Identity.Authentication.API.cases.apiKey)) {
                     Path.apiKey
-                    BearerAuth.Router()
+                    RFC_6750.Bearer.Router()
                 }
             }
         }

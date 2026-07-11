@@ -12,11 +12,11 @@ extension Identity.MFA {
     /// TOTP-specific types and operations.
     public struct TOTP: @unchecked Sendable {
         public var client: Identity.MFA.TOTP.Client
-        public var router: any URLRouting.Router<Identity.MFA.TOTP.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.TOTP.API>
 
         public init(
             client: Identity.MFA.TOTP.Client,
-            router: any URLRouting.Router<Identity.MFA.TOTP.API> = Identity.MFA.TOTP.API.Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.TOTP.API> = Identity.MFA.TOTP.API.Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

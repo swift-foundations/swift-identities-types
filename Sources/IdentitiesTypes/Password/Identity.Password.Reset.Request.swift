@@ -53,9 +53,15 @@ extension Identity.Password.Reset.Request {
         public init() {}
 
         public var body: some URLRouting.Router<Identity.Password.Reset.Request> {
-            Method.post
-            Path<PathBuilder.Component<String>>.request
-            Body(.form(Identity.Password.Reset.Request.self, decoder: .identities))
+            // Route-level wrap (W3): a bare Take-sequence body leaves the Skip-chain's
+            // `Either` failure uncollapsed; the `URLRouting.Route` node collapses it to
+            // `RFC_3986.URI.Routing.Error` (pinned by url-routing FormBodyRouteTests).
+            // `.identity()` is the struct-output analogue of the tested `.case` form.
+            URLRouting.Route(.identity()) {
+                Method.post
+                Path<PathBuilder.Component<String>>.request
+                URLRouting.Body(.form(Identity.Password.Reset.Request.self, decoder: .identities))
+            }
         }
     }
 }

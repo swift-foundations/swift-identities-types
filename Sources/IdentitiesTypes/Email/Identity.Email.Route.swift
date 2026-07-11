@@ -5,7 +5,7 @@
 //  Feature-based routing for Email functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Email {
@@ -20,8 +20,7 @@ extension Identity.Email {
     /// let route = Identity.Email.Route.api(.change(.request(...)))
     /// let viewRoute = Identity.Email.Route.view(.change(.request))
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         /// API endpoints for email operations
         case api(API)
@@ -43,14 +42,14 @@ extension Identity.Email.Route {
         public var body: some URLRouting.Router<Identity.Email.Route> {
             OneOf {
                 // API routes under /api prefix
-                URLRouting.Route(.case(Identity.Email.Route.api)) {
+                URLRouting.Route(.case(Identity.Email.Route.cases.api)) {
                     Path { "api" }
                     Path { "email" }
                     Identity.Email.API.Router()
                 }
 
                 // View routes (no /api prefix)
-                URLRouting.Route(.case(Identity.Email.Route.view)) {
+                URLRouting.Route(.case(Identity.Email.Route.cases.view)) {
                     Path { "email" }
                     Identity.Email.View.Router()
                 }

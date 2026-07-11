@@ -45,7 +45,7 @@ extension Identity.Email.Change: Dependency.Key.Test {
                     )
                 }
             ),
-            router: Identity.Email.Change.API.Router()
+            router: Identity.Email.Change.API.Router().eraseToAnyParserPrinter()
         )
     }
 }

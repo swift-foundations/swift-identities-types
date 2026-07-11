@@ -11,13 +11,13 @@ extension Identity.MFA {
     /// BackupCodes-specific types and operations.
     public struct BackupCodes: @unchecked Sendable {
         public var client: Identity.MFA.BackupCodes.Client
-        public var router: any URLRouting.Router<Identity.MFA.BackupCodes.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.BackupCodes.API>
 
         public init(
             client: Identity.MFA.BackupCodes.Client,
-            router: any URLRouting.Router<Identity.MFA.BackupCodes.API> = Identity.MFA.BackupCodes
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.BackupCodes.API> = Identity.MFA.BackupCodes
                 .API
-                .Router()
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

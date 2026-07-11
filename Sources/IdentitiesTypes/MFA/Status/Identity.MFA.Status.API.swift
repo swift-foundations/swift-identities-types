@@ -5,14 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
 extension Identity.MFA.Status {
     /// General MFA status operations.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Get the current MFA status including configured methods and requirements
         case get
@@ -30,11 +29,11 @@ extension Identity.MFA.Status.API {
 
         public var body: some URLRouting.Router<Identity.MFA.Status.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.MFA.Status.API.get)) {
+                URLRouting.Route(.case(Identity.MFA.Status.API.cases.get)) {
                     Method.get
                 }
 
-                URLRouting.Route(.case(Identity.MFA.Status.API.challenge)) {
+                URLRouting.Route(.case(Identity.MFA.Status.API.cases.challenge)) {
                     Method.get
                     Path.challenge
                 }

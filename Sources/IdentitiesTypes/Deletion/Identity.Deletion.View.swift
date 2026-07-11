@@ -5,15 +5,14 @@
 //  Feature-based routing for Delete functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Deletion {
     /// View routes for identity deletion pages.
     ///
     /// Provides frontend routes for the deletion flow.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum View: Equatable, Sendable {
         /// Identity deletion request page
         case request
@@ -33,7 +32,7 @@ extension Identity.Deletion.View {
         public init() {}
 
         public var body: some URLRouting.Router<Identity.Deletion.View> {
-            URLRouting.Route(.case(Identity.Deletion.View.request))
+            URLRouting.Route(.case(Identity.Deletion.View.cases.request))
         }
     }
 }

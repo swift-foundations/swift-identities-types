@@ -5,7 +5,7 @@
 //  Feature-based routing for Create functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Creation {
@@ -14,8 +14,7 @@ extension Identity.Creation {
     /// Provides frontend routes for:
     /// - Creation request form
     /// - Email verification page
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum View: Equatable, Sendable {
         /// Identity creation request page
         case request
@@ -38,21 +37,26 @@ extension Identity.Creation.View {
 
         public var body: some URLRouting.Router<Identity.Creation.View> {
             OneOf {
-                URLRouting.Route(.case(Identity.Creation.View.request)) {
+                URLRouting.Route(.case(Identity.Creation.View.cases.request)) {
                     Path { "request" }
                 }
 
-                URLRouting.Route(.case(Identity.Creation.View.verify)) {
+                URLRouting.Route(.case(Identity.Creation.View.cases.verify)) {
                     Path { "verify" }
 
-                    Parse(.memberwise(Identity.Creation.Verification.self.init)) {
+                    Parse(
+                        .memberwise(
+                            Identity.Creation.Verification.init(token:email:),
+                            { ($0.token, $0.email) }
+                        )
+                    ) {
                         URLRouting.Query {
-                            Field(
+                            RFC_3986.URI.Query.Field(
                                 Identity.Creation.Verification.CodingKeys.token.rawValue,
                                 .string,
                                 default: ""
                             )
-                            Field(
+                            RFC_3986.URI.Query.Field(
                                 Identity.Creation.Verification.CodingKeys.email.rawValue,
                                 .string,
                                 default: ""

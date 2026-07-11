@@ -11,13 +11,13 @@ extension Identity.Password {
     /// Namespace containing password change functionality for authenticated users.
     public struct Change: @unchecked Sendable {
         public var client: Identity.Password.Change.Client
-        public var router: any URLRouting.Router<Identity.Password.Change.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Password.Change.API>
 
         public init(
             client: Identity.Password.Change.Client,
-            router: any URLRouting.Router<Identity.Password.Change.API> = Identity.Password.Change
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Password.Change.API> = Identity.Password.Change
                 .API
-                .Router()
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

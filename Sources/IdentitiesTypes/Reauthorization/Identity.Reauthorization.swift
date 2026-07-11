@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 05/02/2025.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity {
@@ -16,13 +16,13 @@ extension Identity {
 
     public struct Reauthorization: @unchecked Sendable {
         public var client: Identity.Reauthorization.Client
-        public var router: any URLRouting.Router<Identity.Reauthorization.Route>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Reauthorization.Route>
 
         public init(
             client: Identity.Reauthorization.Client,
-            router: any URLRouting.Router<Identity.Reauthorization.Route> = Identity.Reauthorization
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Reauthorization.Route> = Identity.Reauthorization
                 .Route
-                .Router()
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router
@@ -31,8 +31,7 @@ extension Identity {
 }
 
 extension Identity.Reauthorization {
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Sendable, Equatable {
         case api(Identity.Reauthorization.API)
     }
@@ -48,7 +47,7 @@ extension Identity.Reauthorization.Route {
 
         public var body: some URLRouting.Router<Identity.Reauthorization.Route> {
             OneOf {
-                URLRouting.Route(.case(Identity.Reauthorization.Route.api)) {
+                URLRouting.Route(.case(Identity.Reauthorization.Route.cases.api)) {
                     Path.api
                     Path.reauthorize
                     Identity.Reauthorization.API.Router()

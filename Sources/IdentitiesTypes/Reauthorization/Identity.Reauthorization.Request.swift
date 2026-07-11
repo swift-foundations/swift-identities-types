@@ -60,8 +60,12 @@ extension Identity.Reauthorization.Request {
 
         /// The routing configuration for reauthorization requests.
         public var body: some URLRouting.Router<Identity.Reauthorization.Request> {
-            Method.post
-            Body(.form(Identity.Reauthorization.Request.self, decoder: .identities))
+            // Route-level wrap (W3): collapses the Skip-chain's `Either` failure into
+            // `RFC_3986.URI.Routing.Error` (url-routing FormBodyRouteTests pattern).
+            URLRouting.Route(.identity()) {
+                Method.post
+                URLRouting.Body(.form(Identity.Reauthorization.Request.self, decoder: .identities))
+            }
         }
     }
 }

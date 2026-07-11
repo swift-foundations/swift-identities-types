@@ -65,7 +65,7 @@ struct MFARouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.totp.verify))
-        #expect(match.totp?.verify?.code == "123456")
+        #expect(Identity.MFA.API.cases.totp.verify.extract(match)?.code == "123456")
     }
 
     @Test("Creates correct URL for MFA TOTP disable")
@@ -92,7 +92,7 @@ struct MFARouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.sms.setup))
-        #expect(match.sms?.setup?.phoneNumber == "+1234567890")
+        #expect(Identity.MFA.API.cases.sms.setup.extract(match)?.phoneNumber == "+1234567890")
     }
 
     @Test("Creates correct URL for MFA SMS verification")
@@ -106,7 +106,7 @@ struct MFARouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.sms.verify))
-        #expect(match.sms?.verify?.code == "123456")
+        #expect(Identity.MFA.API.cases.sms.verify.extract(match)?.code == "123456")
     }
 
     @Test("Creates correct URL for MFA SMS request code")
@@ -145,7 +145,7 @@ struct MFARouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.email.setup))
-        #expect(match.email?.setup?.email == "mfa@example.com")
+        #expect(Identity.MFA.API.cases.email.setup.extract(match)?.email == "mfa@example.com")
     }
 
     @Test("Creates correct URL for MFA Email verification")
@@ -159,7 +159,7 @@ struct MFARouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.email.verify))
-        #expect(match.email?.verify?.code == "123456")
+        #expect(Identity.MFA.API.cases.email.verify.extract(match)?.code == "123456")
     }
 
     @Test("Creates correct URL for MFA Email request code")
@@ -213,7 +213,7 @@ struct MFARouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.backupCodes.verify))
-        #expect(match.backupCodes?.verify?.code == "backup-code-123")
+        #expect(Identity.MFA.API.cases.backupCodes.verify.extract(match)?.code == "backup-code-123")
     }
 
     @Test("Creates correct URL for MFA WebAuthn begin registration")

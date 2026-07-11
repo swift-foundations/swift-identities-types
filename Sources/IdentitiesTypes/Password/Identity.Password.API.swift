@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 17/10/2024.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Password {
@@ -30,8 +30,7 @@ extension Identity.Password {
     ///   ))
     /// )
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Password reset flow for forgotten passwords
         case reset(Identity.Password.Reset.API)
@@ -66,25 +65,25 @@ extension Identity.Password.API {
         /// requirements for password operations.
         public var body: some URLRouting.Router<Identity.Password.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Password.API.reset)) {
+                URLRouting.Route(.case(Identity.Password.API.cases.reset)) {
                     Path { "reset" }
 
                     OneOf {
-                        URLRouting.Route(.case(Identity.Password.Reset.API.request)) {
+                        URLRouting.Route(.case(Identity.Password.Reset.API.cases.request)) {
                             Identity.Password.Reset.Request.Router()
                         }
 
-                        URLRouting.Route(.case(Identity.Password.Reset.API.confirm)) {
+                        URLRouting.Route(.case(Identity.Password.Reset.API.cases.confirm)) {
                             Identity.Password.Reset.Confirm.Router()
                         }
                     }
                 }
 
-                URLRouting.Route(.case(Identity.Password.API.change)) {
+                URLRouting.Route(.case(Identity.Password.API.cases.change)) {
                     Path { "change" }
 
                     OneOf {
-                        URLRouting.Route(.case(Identity.Password.Change.API.request)) {
+                        URLRouting.Route(.case(Identity.Password.Change.API.cases.request)) {
                             Identity.Password.Change.Request.Router()
                         }
                     }

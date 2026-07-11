@@ -5,14 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
 extension Identity.MFA.Email {
     /// Email-based authentication operations.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Setup email MFA
         case setup(Identity.MFA.Email.Setup)
@@ -39,33 +38,33 @@ extension Identity.MFA.Email.API {
 
         public var body: some URLRouting.Router<Identity.MFA.Email.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.MFA.Email.API.setup)) {
+                URLRouting.Route(.case(Identity.MFA.Email.API.cases.setup)) {
                     Method.post
                     Path.setup
-                    Body(.json(Identity.MFA.Email.Setup.self))
+                    URLRouting.Body(.json(Identity.MFA.Email.Setup.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.Email.API.requestCode)) {
+                URLRouting.Route(.case(Identity.MFA.Email.API.cases.requestCode)) {
                     Method.post
                     Path { "request" }
                 }
 
-                URLRouting.Route(.case(Identity.MFA.Email.API.verify)) {
+                URLRouting.Route(.case(Identity.MFA.Email.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    Body(.json(Identity.MFA.Email.Verify.self))
+                    URLRouting.Body(.json(Identity.MFA.Email.Verify.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.Email.API.updateEmail)) {
+                URLRouting.Route(.case(Identity.MFA.Email.API.cases.updateEmail)) {
                     Method.post
                     Path.update
-                    Body(.json(Identity.MFA.Email.UpdateEmail.self))
+                    URLRouting.Body(.json(Identity.MFA.Email.UpdateEmail.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.Email.API.disable)) {
+                URLRouting.Route(.case(Identity.MFA.Email.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

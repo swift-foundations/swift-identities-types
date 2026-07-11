@@ -131,10 +131,16 @@ struct ViewRouterTests {
 
     @Test("Generate URLs for backup codes routes")
     func testGenerateBackupCodesURLs() throws {
-        // Test generating display URL
+        // Test generating display URL.
+        //
+        // W3 semantic note: PointFree's `OneOf` printed via the LAST matching branch,
+        // so `.display` used to print the bare default path "mfa/backup-codes". The
+        // institute engine prints via the FIRST matching branch — the explicit
+        // "/display" route. Parsing is unchanged (both the bare and the explicit form
+        // still parse to `.display`); only the canonical printed URL moved.
         let displayRoute = Identity.View.mfa(.backupCodes(.display))
         let displayURL = try router.print(displayRoute)
-        #expect(displayURL.path.joined(separator: "/") == "mfa/backup-codes")
+        #expect(displayURL.path.joined(separator: "/") == "mfa/backup-codes/display")
 
         // Test generating verify URL
         let challenge = Identity.MFA.URLChallenge(

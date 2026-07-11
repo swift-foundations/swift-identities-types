@@ -20,7 +20,7 @@ extension Identity.Logout: Dependency.Key.Test {
                     await database.reset()
                 }
             ),
-            router: Identity.Logout.Route.Router()
+            router: Identity.Logout.Route.Router().eraseToAnyParserPrinter()
         )
     }
 }

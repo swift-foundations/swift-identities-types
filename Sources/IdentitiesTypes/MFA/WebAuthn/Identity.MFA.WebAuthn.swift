@@ -12,12 +12,12 @@ extension Identity.MFA {
     /// WebAuthn-specific types and operations.
     public struct WebAuthn: @unchecked Sendable {
         public var client: Identity.MFA.WebAuthn.Client
-        public var router: any URLRouting.Router<Identity.MFA.WebAuthn.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.WebAuthn.API>
 
         public init(
             client: Identity.MFA.WebAuthn.Client,
-            router: any URLRouting.Router<Identity.MFA.WebAuthn.API> = Identity.MFA.WebAuthn.API
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.WebAuthn.API> = Identity.MFA.WebAuthn.API
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

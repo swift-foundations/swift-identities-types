@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 17/10/2024.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 import URLFormCodingURLRouting
 
@@ -30,8 +30,7 @@ extension Identity.Creation {
     ///   .init(token: "verification-token", email: "new@example.com")
     /// )
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Initiates identity creation with email and password
         case request(Identity.Creation.Request)
@@ -64,15 +63,15 @@ extension Identity.Creation.API {
         /// specific request format and validation rules.
         public var body: some URLRouting.Router<Identity.Creation.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Creation.API.request)) {
+                URLRouting.Route(.case(Identity.Creation.API.cases.request)) {
                     Method.post
                     Path<PathBuilder.Component<String>>.request
-                    Body(.form(Identity.Creation.Request.self, decoder: .identities))
+                    URLRouting.Body(.form(Identity.Creation.Request.self, decoder: .identities))
                 }
-                URLRouting.Route(.case(Identity.Creation.API.verify)) {
+                URLRouting.Route(.case(Identity.Creation.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    Body(.form(Identity.Creation.Verification.self, decoder: .identities))
+                    URLRouting.Body(.form(Identity.Creation.Verification.self, decoder: .identities))
                 }
             }
         }

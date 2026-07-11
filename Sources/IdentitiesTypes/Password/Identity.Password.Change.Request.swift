@@ -49,9 +49,13 @@ extension Identity.Password.Change.Request {
         public init() {}
 
         public var body: some URLRouting.Router<Identity.Password.Change.Request> {
-            Method.post
-            Path { "request" }
-            Body(.form(Identity.Password.Change.Request.self, decoder: .identities))
+            // Route-level wrap (W3): collapses the Skip-chain's `Either` failure into
+            // `RFC_3986.URI.Routing.Error` (url-routing FormBodyRouteTests pattern).
+            URLRouting.Route(.identity()) {
+                Method.post
+                Path { "request" }
+                URLRouting.Body(.form(Identity.Password.Change.Request.self, decoder: .identities))
+            }
         }
     }
 }

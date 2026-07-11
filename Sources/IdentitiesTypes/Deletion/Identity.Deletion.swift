@@ -17,12 +17,12 @@ extension Identity {
     /// 3. The ability to cancel a pending deletion
     public struct Deletion: @unchecked Sendable {
         public var client: Identity.Deletion.Client
-        public var router: any URLRouting.Router<Identity.Deletion.Route>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Deletion.Route>
 
         public init(
             client: Identity.Deletion.Client,
-            router: any URLRouting.Router<Identity.Deletion.Route> = Identity.Deletion.Route
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Deletion.Route> = Identity.Deletion.Route
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router
@@ -78,8 +78,12 @@ extension Identity.Deletion.Request {
         public init() {}
 
         public var body: some URLRouting.Router<Identity.Deletion.Request> {
-            Method.post
-            Body(.form(Identity.Deletion.Request.self, decoder: .identities))
+            // Route-level wrap (W3): collapses the Skip-chain's `Either` failure into
+            // `RFC_3986.URI.Routing.Error` (url-routing FormBodyRouteTests pattern).
+            URLRouting.Route(.identity()) {
+                Method.post
+                URLRouting.Body(.form(Identity.Deletion.Request.self, decoder: .identities))
+            }
         }
     }
 }

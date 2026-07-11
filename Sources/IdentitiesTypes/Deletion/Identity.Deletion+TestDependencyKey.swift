@@ -32,7 +32,7 @@ extension Identity.Deletion: Dependency.Key.Test {
                     try await database.confirmDeletion(email: email)
                 }
             ),
-            router: Identity.Deletion.Route.Router()
+            router: Identity.Deletion.Route.Router().eraseToAnyParserPrinter()
         )
     }
 }

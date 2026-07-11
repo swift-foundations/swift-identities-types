@@ -18,12 +18,12 @@ extension Identity {
     /// This design ensures email ownership and reduces the creation of fraudulent identities.
     public struct Creation: @unchecked Sendable {
         public var client: Identity.Creation.Client
-        public var router: any URLRouting.Router<Identity.Creation.Route>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Creation.Route>
 
         public init(
             client: Identity.Creation.Client,
-            router: any URLRouting.Router<Identity.Creation.Route> = Identity.Creation.Route
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Creation.Route> = Identity.Creation.Route
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

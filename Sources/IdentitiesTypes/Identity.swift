@@ -4,7 +4,7 @@
 //
 //  Created by Coen ten Thije Boonkkamp on 31/01/2025.
 //
-import CasePaths
+import Dual
 import Dependencies
 import URLRouting
 
@@ -63,7 +63,7 @@ public struct Identity: @unchecked Sendable {
     /// If nil, OAuth is not available
     public var oauth: Identity.OAuth?
 
-    public var router: any URLRouting.Router<Identity.Route>
+    public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Route>
 
     public init(
         authenticate: Identity.Authentication,
@@ -76,7 +76,7 @@ public struct Identity: @unchecked Sendable {
         password: Identity.Password,
         mfa: Identity.MFA? = nil,
         oauth: Identity.OAuth? = nil,
-        router: any URLRouting.Router<Identity.Route> = Identity.Route.Router()
+        router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Route> = Identity.Route.Router().eraseToAnyParserPrinter()
     ) {
         self.authenticate = authenticate
         self.logout = logout

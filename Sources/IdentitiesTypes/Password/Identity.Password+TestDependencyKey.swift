@@ -31,7 +31,7 @@ extension Identity.Password.Reset: Dependency.Key.Test {
                     try await database.confirmPasswordReset(token: token, newPassword: newPassword)
                 }
             ),
-            router: Identity.Password.Reset.API.Router()
+            router: Identity.Password.Reset.API.Router().eraseToAnyParserPrinter()
         )
     }
 }
@@ -54,7 +54,7 @@ extension Identity.Password.Change: Dependency.Key.Test {
                     )
                 }
             ),
-            router: Identity.Password.Change.API.Router()
+            router: Identity.Password.Change.API.Router().eraseToAnyParserPrinter()
         )
     }
 }

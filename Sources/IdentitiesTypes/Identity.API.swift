@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 10/09/2024.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity {
@@ -35,8 +35,7 @@ extension Identity {
     ///   // Handle identity creation
     /// }
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Handles user authentication via credentials, tokens, or API keys
         case authenticate(Identity.Authentication.API)
@@ -96,47 +95,47 @@ extension Identity.API {
         /// sub-router that handles the specific routing logic.
         public var body: some URLRouting.Router<Identity.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.API.authenticate)) {
+                URLRouting.Route(.case(Identity.API.cases.authenticate)) {
                     Path.authenticate
                     Identity.Authentication.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.reauthorize)) {
+                URLRouting.Route(.case(Identity.API.cases.reauthorize)) {
                     Path.reauthorize
                     Identity.Reauthorization.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.create)) {
+                URLRouting.Route(.case(Identity.API.cases.create)) {
                     Path.create
                     Identity.Creation.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.delete)) {
+                URLRouting.Route(.case(Identity.API.cases.delete)) {
                     Path.delete
                     Identity.Deletion.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.logout)) {
+                URLRouting.Route(.case(Identity.API.cases.logout)) {
                     Path.logout
                     Identity.Logout.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.email)) {
+                URLRouting.Route(.case(Identity.API.cases.email)) {
                     Path.email
                     Identity.Email.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.password)) {
+                URLRouting.Route(.case(Identity.API.cases.password)) {
                     Path.password
                     Identity.Password.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.mfa)) {
+                URLRouting.Route(.case(Identity.API.cases.mfa)) {
                     Path.mfa
                     Identity.MFA.API.Router()
                 }
 
-                URLRouting.Route(.case(Identity.API.oauth)) {
+                URLRouting.Route(.case(Identity.API.cases.oauth)) {
                     Path.oauth
                     Identity.OAuth.API.Router()
                 }

@@ -15,12 +15,12 @@ extension Identity.Password {
     /// 2. Confirming the reset with a token and new password
     public struct Reset: @unchecked Sendable {
         public var client: Identity.Password.Reset.Client
-        public var router: any URLRouting.Router<Identity.Password.Reset.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Password.Reset.API>
 
         public init(
             client: Identity.Password.Reset.Client,
-            router: any URLRouting.Router<Identity.Password.Reset.API> = Identity.Password.Reset.API
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Password.Reset.API> = Identity.Password.Reset.API
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

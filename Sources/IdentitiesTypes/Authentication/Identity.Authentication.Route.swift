@@ -5,7 +5,7 @@
 //  Feature-based routing for Authentication functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Authentication {
@@ -20,8 +20,7 @@ extension Identity.Authentication {
     /// let route = Identity.Authentication.Route.api(.credentials(...))
     /// let viewRoute = Identity.Authentication.Route.view(.credentials)
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Sendable, Hashable, Codable {
         /// API endpoints for authentication operations
         case api(Identity.Authentication.API)
@@ -43,14 +42,14 @@ extension Identity.Authentication.Route {
         public var body: some URLRouting.Router<Identity.Authentication.Route> {
             OneOf {
                 // API routes under /api prefix
-                URLRouting.Route(.case(Identity.Authentication.Route.api)) {
+                URLRouting.Route(.case(Identity.Authentication.Route.cases.api)) {
                     Path { "api" }
                     Path { "authenticate" }
                     Identity.Authentication.API.Router()
                 }
 
                 // View routes use /login for better UX
-                URLRouting.Route(.case(Identity.Authentication.Route.view)) {
+                URLRouting.Route(.case(Identity.Authentication.Route.cases.view)) {
                     Identity.Authentication.View.Router()
                 }
             }

@@ -13,11 +13,11 @@ extension Identity {
     /// Logout handles the termination of user sessions and clearing of authentication tokens.
     public struct Logout: @unchecked Sendable {
         public var client: Identity.Logout.Client
-        public var router: any URLRouting.Router<Identity.Logout.Route>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Logout.Route>
 
         public init(
             client: Identity.Logout.Client,
-            router: any URLRouting.Router<Identity.Logout.Route> = Identity.Logout.Route.Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Logout.Route> = Identity.Logout.Route.Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

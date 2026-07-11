@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 import URLFormCodingURLRouting
@@ -14,8 +14,7 @@ extension Identity.MFA.TOTP {
     /// TOTP (Time-based One-Time Password) operations.
     ///
     /// Supports authenticator apps like Google Authenticator, Authy, etc.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Initialize TOTP setup (returns secret and QR code)
         case setup
@@ -41,27 +40,27 @@ extension Identity.MFA.TOTP.API {
 
         public var body: some URLRouting.Router<Identity.MFA.TOTP.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.MFA.TOTP.API.setup)) {
+                URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.setup)) {
                     Method.post
                     Path.setup
                 }
 
-                URLRouting.Route(.case(Identity.MFA.TOTP.API.confirmSetup)) {
+                URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.confirmSetup)) {
                     Method.post
                     Path.confirm
-                    Body(.form(Identity.MFA.TOTP.ConfirmSetup.self, decoder: .identities))
+                    URLRouting.Body(.form(Identity.MFA.TOTP.ConfirmSetup.self, decoder: .identities))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.TOTP.API.verify)) {
+                URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    Body(.json(Identity.MFA.TOTP.Verify.self))
+                    URLRouting.Body(.json(Identity.MFA.TOTP.Verify.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.TOTP.API.disable)) {
+                URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

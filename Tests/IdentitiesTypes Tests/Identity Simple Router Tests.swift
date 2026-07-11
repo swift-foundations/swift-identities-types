@@ -33,8 +33,8 @@ struct SimpleIdentityAPIRouterTests {
         // Round-trip test
         let match = try router.match(request: request)
         #expect(match.is(\.authenticate.credentials))
-        #expect(match.authenticate?.credentials?.username == "user@example.com")
-        #expect(match.authenticate?.credentials?.password == "password123")
+        #expect(Identity.API.cases.authenticate.credentials.extract(match)?.username == "user@example.com")
+        #expect(Identity.API.cases.authenticate.credentials.extract(match)?.password == "password123")
     }
 
     @Test("Creates correct URL for logout")

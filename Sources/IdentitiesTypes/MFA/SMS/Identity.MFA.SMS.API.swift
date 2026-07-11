@@ -5,14 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
 extension Identity.MFA.SMS {
     /// SMS-based authentication operations.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Setup SMS with phone number
         case setup(Identity.MFA.SMS.Setup)
@@ -39,33 +38,33 @@ extension Identity.MFA.SMS.API {
 
         public var body: some URLRouting.Router<Identity.MFA.SMS.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.MFA.SMS.API.setup)) {
+                URLRouting.Route(.case(Identity.MFA.SMS.API.cases.setup)) {
                     Method.post
                     Path.setup
-                    Body(.json(Identity.MFA.SMS.Setup.self))
+                    URLRouting.Body(.json(Identity.MFA.SMS.Setup.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.SMS.API.requestCode)) {
+                URLRouting.Route(.case(Identity.MFA.SMS.API.cases.requestCode)) {
                     Method.post
                     Path { "request" }
                 }
 
-                URLRouting.Route(.case(Identity.MFA.SMS.API.verify)) {
+                URLRouting.Route(.case(Identity.MFA.SMS.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    Body(.json(Identity.MFA.SMS.Verify.self))
+                    URLRouting.Body(.json(Identity.MFA.SMS.Verify.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.SMS.API.updatePhoneNumber)) {
+                URLRouting.Route(.case(Identity.MFA.SMS.API.cases.updatePhoneNumber)) {
                     Method.post
                     Path.update
-                    Body(.json(Identity.MFA.SMS.UpdatePhoneNumber.self))
+                    URLRouting.Body(.json(Identity.MFA.SMS.UpdatePhoneNumber.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.SMS.API.disable)) {
+                URLRouting.Route(.case(Identity.MFA.SMS.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

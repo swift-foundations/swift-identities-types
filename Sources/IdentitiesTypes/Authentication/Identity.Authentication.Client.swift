@@ -7,6 +7,7 @@
 
 import Dependencies
 import JWT
+import RFC_6750
 import URLRouting
 
 extension Identity.Authentication {
@@ -105,7 +106,7 @@ extension Identity.Authentication.Token.Client {
     ///
     /// - Parameter access: The bearer authentication token to validate
     /// - Throws: Authentication errors if the token is invalid
-    public func access(_ access: BearerAuth) async throws {
+    public func access(_ access: RFC_6750.Bearer) async throws {
         try await self.access(access.token)
     }
 }
@@ -137,7 +138,7 @@ extension Identity.Authentication.Client {
     /// - Parameter apiKey: The bearer API key to authenticate with
     /// - Returns: An authentication response containing access and refresh tokens
     /// - Throws: Authentication errors if the API key is invalid
-    public func apiKey(_ apiKey: BearerAuth) async throws -> Identity.Authentication.Response {
+    public func apiKey(_ apiKey: RFC_6750.Bearer) async throws -> Identity.Authentication.Response {
         return try await self.apiKey(apiKey.token)
     }
 }

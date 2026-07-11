@@ -16,12 +16,12 @@ extension Identity.Email {
     /// 3. Confirming the change with a verification token
     public struct Change: @unchecked Sendable {
         public var client: Identity.Email.Change.Client
-        public var router: any URLRouting.Router<Identity.Email.Change.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Email.Change.API>
 
         public init(
             client: Identity.Email.Change.Client,
-            router: any URLRouting.Router<Identity.Email.Change.API> = Identity.Email.Change.API
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Email.Change.API> = Identity.Email.Change.API
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

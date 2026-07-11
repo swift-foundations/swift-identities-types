@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 18/02/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
@@ -17,8 +17,7 @@ extension Identity.Email {
     /// 2. Verify new email via confirmation token
     ///
     /// Future extensions may include additional email management features.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Email address change operation
         case change(Identity.Email.Change.API)
@@ -36,7 +35,7 @@ extension Identity.Email.API {
 
         public var body: some URLRouting.Router<Identity.Email.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Email.API.change)) {
+                URLRouting.Route(.case(Identity.Email.API.cases.change)) {
                     Identity.Email.Change.API.Router()
                 }
             }
@@ -66,8 +65,7 @@ extension Identity.Email.Change {
     ///
     /// > Important: The new email address is not activated until confirmed
     /// > through the verification token sent to that address.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Initiates an email change request with the new address
         case request(Identity.Email.Change.Request)
@@ -100,11 +98,11 @@ extension Identity.Email.Change.API {
         /// request format and validation rules.
         public var body: some URLRouting.Router<Identity.Email.Change.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Email.Change.API.request)) {
+                URLRouting.Route(.case(Identity.Email.Change.API.cases.request)) {
                     Identity.Email.Change.Request.Router()
                 }
 
-                URLRouting.Route(.case(Identity.Email.Change.API.confirm)) {
+                URLRouting.Route(.case(Identity.Email.Change.API.cases.confirm)) {
                     Identity.Email.Change.Confirmation.Router()
                 }
             }

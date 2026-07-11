@@ -11,12 +11,12 @@ extension Identity.MFA {
     /// Status-specific types and operations.
     public struct Status: @unchecked Sendable {
         public var client: Identity.MFA.Status.Client
-        public var router: any URLRouting.Router<Identity.MFA.Status.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.Status.API>
 
         public init(
             client: Identity.MFA.Status.Client,
-            router: any URLRouting.Router<Identity.MFA.Status.API> = Identity.MFA.Status.API
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.Status.API> = Identity.MFA.Status.API
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

@@ -5,7 +5,7 @@
 //  Feature-based routing for Delete functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Deletion {
@@ -20,8 +20,7 @@ extension Identity.Deletion {
     /// let route = Identity.Deletion.Route.api(.request(...))
     /// let viewRoute = Identity.Deletion.Route.view(.request)
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         /// API endpoints for deletion operations
         case api(API)
@@ -43,14 +42,14 @@ extension Identity.Deletion.Route {
         public var body: some URLRouting.Router<Identity.Deletion.Route> {
             OneOf {
                 // API routes under /api prefix
-                URLRouting.Route(.case(Identity.Deletion.Route.api)) {
+                URLRouting.Route(.case(Identity.Deletion.Route.cases.api)) {
                     Path { "api" }
                     Path { "delete" }
                     Identity.Deletion.API.Router()
                 }
 
                 // View routes (no /api prefix)
-                URLRouting.Route(.case(Identity.Deletion.Route.view)) {
+                URLRouting.Route(.case(Identity.Deletion.Route.cases.view)) {
                     Path { "delete" }
                     Identity.Deletion.View.Router()
                 }

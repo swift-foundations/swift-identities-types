@@ -11,11 +11,11 @@ extension Identity.MFA {
     /// Email-specific types and operations.
     public struct Email: @unchecked Sendable {
         public var client: Identity.MFA.Email.Client
-        public var router: any URLRouting.Router<Identity.MFA.Email.API>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.Email.API>
 
         public init(
             client: Identity.MFA.Email.Client,
-            router: any URLRouting.Router<Identity.MFA.Email.API> = Identity.MFA.Email.API.Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.MFA.Email.API> = Identity.MFA.Email.API.Router().eraseToAnyParserPrinter()
         ) {
             self.client = client
             self.router = router

@@ -5,14 +5,13 @@
 //  Created by Coen ten Thije Boonkkamp on 19/08/2025.
 //
 
-import CasePaths
+import Dual
 import Foundation
 import URLRouting
 
 extension Identity.MFA.BackupCodes {
     /// Backup code operations.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Regenerate backup codes
         case regenerate
@@ -33,18 +32,18 @@ extension Identity.MFA.BackupCodes.API {
 
         public var body: some URLRouting.Router<Identity.MFA.BackupCodes.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.MFA.BackupCodes.API.regenerate)) {
+                URLRouting.Route(.case(Identity.MFA.BackupCodes.API.cases.regenerate)) {
                     Method.post
                     Path { "regenerate" }
                 }
 
-                URLRouting.Route(.case(Identity.MFA.BackupCodes.API.verify)) {
+                URLRouting.Route(.case(Identity.MFA.BackupCodes.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    Body(.json(Identity.MFA.BackupCodes.Verify.self))
+                    URLRouting.Body(.json(Identity.MFA.BackupCodes.Verify.self))
                 }
 
-                URLRouting.Route(.case(Identity.MFA.BackupCodes.API.remaining)) {
+                URLRouting.Route(.case(Identity.MFA.BackupCodes.API.cases.remaining)) {
                     Method.get
                     Path { "remaining" }
                 }

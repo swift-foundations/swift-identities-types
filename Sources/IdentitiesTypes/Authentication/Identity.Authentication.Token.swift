@@ -6,6 +6,7 @@
 //
 
 import JWT
+import RFC_6750
 import URLRouting
 
 extension Identity.Authentication {
@@ -19,7 +20,7 @@ extension Identity.Authentication {
     /// while maintaining session persistence through refresh tokens.
     public enum Token: Equatable, Sendable {
         /// Short-lived token for API authentication
-        case access(BearerAuth)
+        case access(RFC_6750.Bearer)
         /// Long-lived token for obtaining new access tokens
         case refresh(JWT)
     }

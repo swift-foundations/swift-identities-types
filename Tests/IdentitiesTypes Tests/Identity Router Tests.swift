@@ -16,7 +16,7 @@ import Testing
 @Suite("Identity API Router Tests")
 struct IdentityAPIRouterTests {
 
-    var router: any URLRouting.Router<Identity.Route> {
+    var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Route> {
         @Dependency(\.identity) var identity
         return identity.router
     }
@@ -35,8 +35,8 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.authenticate.api.credentials))
-        #expect(match.authenticate?.api?.credentials?.username == "user@example.com")
-        #expect(match.authenticate?.api?.credentials?.password == "password123")
+        #expect(Identity.Route.cases.authenticate.api.credentials.extract(match)?.username == "user@example.com")
+        #expect(Identity.Route.cases.authenticate.api.credentials.extract(match)?.password == "password123")
     }
 
     @Test("Creates correct URL for authenticate API key")
@@ -48,7 +48,7 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.authenticate.api.apiKey))
-        #expect(match.authenticate?.api?.apiKey?.token == "test-api-key")
+        #expect(Identity.Route.cases.authenticate.api.apiKey.extract(match)?.token == "test-api-key")
     }
 
     @Test("Creates correct URL for identity creation request")
@@ -65,8 +65,8 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.create.api.request))
-        #expect(match.create?.api?.request?.email == "new@example.com")
-        #expect(match.create?.api?.request?.password == "password123")
+        #expect(Identity.Route.cases.create.api.request.extract(match)?.email == "new@example.com")
+        #expect(Identity.Route.cases.create.api.request.extract(match)?.password == "password123")
     }
 
     @Test("Creates correct URL for identity creation verification")
@@ -83,8 +83,8 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.create.api.verify))
-        #expect(match.create?.api?.verify?.email == "verify@example.com")
-        #expect(match.create?.api?.verify?.token == "verification-token")
+        #expect(Identity.Route.cases.create.api.verify.extract(match)?.email == "verify@example.com")
+        #expect(Identity.Route.cases.create.api.verify.extract(match)?.token == "verification-token")
     }
 
     @Test("Creates correct URL for password reset request")
@@ -103,7 +103,7 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.password.api.reset.request))
-        #expect(match.password?.api?.reset?.request?.email == "reset@example.com")
+        #expect(Identity.Route.cases.password.api.reset.request.extract(match)?.email == "reset@example.com")
     }
 
     @Test("Creates correct URL for password reset confirmation")
@@ -122,8 +122,8 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.password.api.reset.confirm))
-        #expect(match.password?.api?.reset?.confirm?.newPassword == "newPassword123")
-        #expect(match.password?.api?.reset?.confirm?.token == "reset-token")
+        #expect(Identity.Route.cases.password.api.reset.confirm.extract(match)?.newPassword == "newPassword123")
+        #expect(Identity.Route.cases.password.api.reset.confirm.extract(match)?.token == "reset-token")
     }
 
     @Test("Creates correct URL for password change request")
@@ -142,8 +142,8 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.password.api.change.request))
-        #expect(match.password?.api?.change?.request?.currentPassword == "current123")
-        #expect(match.password?.api?.change?.request?.newPassword == "new123")
+        #expect(Identity.Route.cases.password.api.change.request.extract(match)?.currentPassword == "current123")
+        #expect(Identity.Route.cases.password.api.change.request.extract(match)?.newPassword == "new123")
     }
 
     @Test("Creates correct URL for email change request")
@@ -162,7 +162,7 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.email.api.change.request))
-        #expect(match.email?.api?.change?.request?.newEmail == "newemail@example.com")
+        #expect(Identity.Route.cases.email.api.change.request.extract(match)?.newEmail == "newemail@example.com")
     }
 
     @Test("Creates correct URL for email change confirmation")
@@ -181,7 +181,7 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.email.api.change.confirm))
-        #expect(match.email?.api?.change?.confirm?.token == "email-change-token")
+        #expect(Identity.Route.cases.email.api.change.confirm.extract(match)?.token == "email-change-token")
     }
 
     @Test("Creates correct URL for delete request")
@@ -198,7 +198,7 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.delete.api.request))
-        #expect(match.delete?.api?.request?.reauthToken == "reauth-token-123")
+        #expect(Identity.Route.cases.delete.api.request.extract(match)?.reauthToken == "reauth-token-123")
     }
 
     @Test("Creates correct URL for delete confirmation")
@@ -261,6 +261,6 @@ struct IdentityAPIRouterTests {
 
         let match = try router.match(request: request)
         #expect(match.is(\.reauthorize.api))
-        #expect(match.reauthorize?.api?.password == "password123")
+        #expect(Identity.Route.cases.reauthorize.api.extract(match)?.password == "password123")
     }
 }

@@ -5,7 +5,7 @@
 //  Feature-based routing for Password functionality
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Password {
@@ -20,8 +20,7 @@ extension Identity.Password {
     /// let route = Identity.Password.Route.api(.reset(.request(...)))
     /// let viewRoute = Identity.Password.Route.view(.reset(.request))
     /// ```
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum Route: Equatable, Sendable {
         /// API endpoints for password operations
         case api(API)
@@ -37,8 +36,7 @@ extension Identity.Password {
     /// Provides frontend routes for:
     /// - Password reset flow (request and confirmation)
     /// - Password change flow for authenticated users
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum View: Equatable, Sendable {
         /// Password reset view flow
         case reset(Reset)
@@ -47,8 +45,7 @@ extension Identity.Password {
         case change(Change)
 
         /// Password reset view endpoints
-        @CasePathable
-        @dynamicMemberLookup
+        @Cases
         public enum Reset: Equatable, Sendable {
             /// Password reset request page
             case request
@@ -60,8 +57,7 @@ extension Identity.Password {
         }
 
         /// Password change view endpoints
-        @CasePathable
-        @dynamicMemberLookup
+        @Cases
         public enum Change: Equatable, Sendable {
             /// Password change request page
             case request
@@ -81,14 +77,14 @@ extension Identity.Password.Route {
         public var body: some URLRouting.Router<Identity.Password.Route> {
             OneOf {
                 // API routes under /api prefix
-                URLRouting.Route(.case(Identity.Password.Route.api)) {
+                URLRouting.Route(.case(Identity.Password.Route.cases.api)) {
                     Path { "api" }
                     Path { "password" }
                     Identity.Password.API.Router()
                 }
 
                 // View routes (no /api prefix)
-                URLRouting.Route(.case(Identity.Password.Route.view)) {
+                URLRouting.Route(.case(Identity.Password.Route.cases.view)) {
                     Path { "password" }
                     Identity.Password.View.Router()
                 }
@@ -109,12 +105,12 @@ extension Identity.Password.View {
 
         public var body: some URLRouting.Router<Identity.Password.View> {
             OneOf {
-                URLRouting.Route(.case(Identity.Password.View.reset)) {
+                URLRouting.Route(.case(Identity.Password.View.cases.reset)) {
                     Path { "reset" }
                     Identity.Password.View.Reset.Router()
                 }
 
-                URLRouting.Route(.case(Identity.Password.View.change)) {
+                URLRouting.Route(.case(Identity.Password.View.cases.change)) {
                     Path { "change" }
                     Identity.Password.View.Change.Router()
                 }
@@ -130,11 +126,11 @@ extension Identity.Password.View.Reset {
 
         public var body: some URLRouting.Router<Identity.Password.View.Reset> {
             OneOf {
-                URLRouting.Route(.case(Identity.Password.View.Reset.request)) {
+                URLRouting.Route(.case(Identity.Password.View.Reset.cases.request)) {
                     Path { "request" }
                 }
 
-                URLRouting.Route(.case(Identity.Password.View.Reset.confirm)) {
+                URLRouting.Route(.case(Identity.Password.View.Reset.cases.confirm)) {
                     Path { "confirm" }
                     Identity.Password.Reset.Confirm.Router()
                 }
@@ -149,7 +145,7 @@ extension Identity.Password.View.Change {
         public init() {}
 
         public var body: some URLRouting.Router<Identity.Password.View.Change> {
-            URLRouting.Route(.case(Identity.Password.View.Change.request)) {
+            URLRouting.Route(.case(Identity.Password.View.Change.cases.request)) {
                 Path { "request" }
             }
         }

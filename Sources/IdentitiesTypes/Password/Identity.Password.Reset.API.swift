@@ -5,13 +5,12 @@
 //  Created by Coen ten Thije Boonkkamp on 11/09/2025.
 //
 
-import CasePaths
+import Dual
 import URLRouting
 
 extension Identity.Password.Reset {
     /// Password reset API endpoints.
-    @CasePathable
-    @dynamicMemberLookup
+    @Cases
     public enum API: Equatable, Sendable {
         /// Request a password reset via email
         case request(Identity.Password.Reset.Request)
@@ -29,11 +28,11 @@ extension Identity.Password.Reset.API {
 
         public var body: some URLRouting.Router<Identity.Password.Reset.API> {
             OneOf {
-                URLRouting.Route(.case(Identity.Password.Reset.API.request)) {
+                URLRouting.Route(.case(Identity.Password.Reset.API.cases.request)) {
                     Identity.Password.Reset.Request.Router()
                 }
 
-                URLRouting.Route(.case(Identity.Password.Reset.API.confirm)) {
+                URLRouting.Route(.case(Identity.Password.Reset.API.cases.confirm)) {
                     Identity.Password.Reset.Confirm.Router()
                 }
             }

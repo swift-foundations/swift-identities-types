@@ -12,13 +12,13 @@ extension Identity {
     public struct Password: @unchecked Sendable {
         public var change: Identity.Password.Change
         public var reset: Identity.Password.Reset
-        public var router: any URLRouting.Router<Identity.Password.Route>
+        public var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Password.Route>
 
         public init(
             change: Identity.Password.Change,
             reset: Identity.Password.Reset,
-            router: any URLRouting.Router<Identity.Password.Route> = Identity.Password.Route
-                .Router()
+            router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Password.Route> = Identity.Password.Route
+                .Router().eraseToAnyParserPrinter()
         ) {
             self.change = change
             self.reset = reset
