@@ -1,4 +1,4 @@
-@_exported import Authenticating
+@_exported import Authentication_Foundation_Integration
 @_exported import Dual
 @_exported import EmailAddress
 @_exported import JWT

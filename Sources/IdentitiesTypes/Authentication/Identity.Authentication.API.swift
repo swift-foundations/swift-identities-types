@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 07/02/2025.
 //
 
-import Authenticating
+import Authentication_Foundation_Integration
 import Dual
 import Foundation
 import JWT
