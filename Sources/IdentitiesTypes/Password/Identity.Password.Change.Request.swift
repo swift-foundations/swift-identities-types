@@ -6,7 +6,7 @@
 //
 
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity.Password.Change {
     /// A request to change an authenticated user's password.

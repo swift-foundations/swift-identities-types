@@ -6,7 +6,7 @@
 //
 
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity {
     /// Namespace for identity deletion functionality within the Identity system.

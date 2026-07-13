@@ -8,7 +8,7 @@
 import Dual
 import Foundation
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity.MFA.TOTP {
     /// TOTP (Time-based One-Time Password) operations.

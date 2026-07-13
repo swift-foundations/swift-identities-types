@@ -7,7 +7,7 @@
 
 import Foundation
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity.MFA {
     /// General MFA verification request during login.

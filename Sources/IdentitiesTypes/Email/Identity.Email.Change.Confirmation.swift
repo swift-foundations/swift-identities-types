@@ -6,7 +6,7 @@
 //
 
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity.Email.Change {
     /// Confirmation data for completing an email change.

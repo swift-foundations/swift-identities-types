@@ -7,7 +7,7 @@
 
 import EmailAddress
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity.Password.Reset {
     /// A request to initiate the password reset process.

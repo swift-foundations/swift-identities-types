@@ -7,7 +7,7 @@
 
 import EmailAddress
 import URLRouting
-import URLFormCodingURLRouting
+import URL_Routing_Form_Coding
 
 extension Identity.Email.Change {
     /// A request to change a user's email address.
