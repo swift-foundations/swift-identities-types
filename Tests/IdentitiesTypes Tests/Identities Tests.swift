@@ -14,7 +14,8 @@ import Testing
 @testable import IdentitiesTypes
 
 @Suite(
-    "Authentication Tests"
+    "Authentication Tests",
+    .dependencies
 )
 struct AuthenticationTests {
     @Test("Successfully authenticates with valid credentials")
@@ -88,7 +89,8 @@ struct AuthenticationTests {
 }
 
 @Suite(
-    "Identity Creation Tests"
+    "Identity Creation Tests",
+    .dependencies
 )
 struct IdentityCreationTests {
     @Test("Successfully creates new identity")
@@ -144,7 +146,8 @@ struct IdentityCreationTests {
 }
 
 @Suite(
-    "Password Management Tests"
+    "Password Management Tests",
+    .dependencies
 )
 struct PasswordManagementTests {
     @Test("Successfully completes password reset flow")
@@ -236,7 +239,8 @@ struct PasswordManagementTests {
 }
 
 @Suite(
-    "Email Management Tests"
+    "Email Management Tests",
+    .dependencies
 )
 struct EmailManagementTests {
     @Test("Successfully completes email change flow")

@@ -14,7 +14,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("README Verification Tests")
+@Suite("README Verification Tests", .dependencies)
 struct ReadmeVerificationTests {
 
     // MARK: - Quick Start Examples

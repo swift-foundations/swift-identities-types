@@ -62,7 +62,7 @@ struct BasicAuthenticationTests {
     }
 }
 
-@Suite("Basic Identity Tests")
+@Suite("Basic Identity Tests", .dependencies)
 struct BasicIdentityTests {
 
     @Test("Successfully authenticates with valid credentials")

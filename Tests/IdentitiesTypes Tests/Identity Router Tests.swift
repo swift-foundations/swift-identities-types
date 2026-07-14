@@ -13,7 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Identity API Router Tests")
+@Suite("Identity API Router Tests", .dependencies)
 struct IdentityAPIRouterTests {
 
     var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Route> {
