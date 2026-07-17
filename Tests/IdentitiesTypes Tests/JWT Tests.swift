@@ -14,11 +14,11 @@ import Testing
 
 // JWT token tests removed since JWT is now just a String type alias
 
-@Suite("Authentication Response Tests")
-struct AuthenticationResponseTests {
+@Suite
+struct Test {
 
-    @Test("Creates authentication response with tokens")
-    func testAuthenticationResponseCreation() {
+    @Test
+    func `Creates authentication response with tokens`() {
         let accessToken = "access.token.value"
         let refreshToken = "refresh.token.value"
         let response = Identity.Authentication.Response(
@@ -30,8 +30,8 @@ struct AuthenticationResponseTests {
         #expect(response.refreshToken == refreshToken)
     }
 
-    @Test("Authentication response equality")
-    func testAuthenticationResponseEquality() {
+    @Test
+    func `Authentication response equality`() {
         let response1 = Identity.Authentication.Response(
             accessToken: "access.token",
             refreshToken: "refresh.token"
@@ -44,8 +44,8 @@ struct AuthenticationResponseTests {
         #expect(response1 == response2)
     }
 
-    @Test("Authentication response encoding and decoding")
-    func testAuthenticationResponseCodable() throws {
+    @Test
+    func `Authentication response encoding and decoding`() throws {
         let response = Identity.Authentication.Response(
             accessToken: "access.token.value",
             refreshToken: "refresh.token.value"
@@ -63,19 +63,19 @@ struct AuthenticationResponseTests {
     }
 }
 
-@Suite("Bearer Authentication Tests")
-struct BearerAuthTests {
+@Suite
+struct Test {
 
-    @Test("Creates bearer auth with token")
-    func testBearerAuthCreation() throws {
+    @Test
+    func `Creates bearer auth with token`() throws {
         let token = "sk-test-api-key-123"
         let bearerAuth = try BearerAuth(token: token)
 
         #expect(bearerAuth.token == token)
     }
 
-    @Test("Bearer auth equality")
-    func testBearerAuthEquality() throws {
+    @Test
+    func `Bearer auth equality`() throws {
         let token = "test-token"
         let auth1 = try BearerAuth(token: token)
         let auth2 = try BearerAuth(token: token)
@@ -83,8 +83,8 @@ struct BearerAuthTests {
         #expect(auth1 == auth2)
     }
 
-    @Test("Bearer auth encoding and decoding")
-    func testBearerAuthCodable() throws {
+    @Test
+    func `Bearer auth encoding and decoding`() throws {
         let bearerAuth = try BearerAuth(token: "api-key-123")
 
         let encoder = JSONEncoder()
@@ -97,8 +97,8 @@ struct BearerAuthTests {
         #expect(decodedAuth == bearerAuth)
     }
 
-    @Test("Bearer auth router creates correct header")
-    func testBearerAuthRouterHeader() throws {
+    @Test
+    func `Bearer auth router creates correct header`() throws {
         let bearerAuth = try BearerAuth(token: "test-token-123")
         let router = BearerAuth.Router()
 
@@ -108,7 +108,7 @@ struct BearerAuthTests {
         #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer test-token-123")
     }
 
-    // @Test("Bearer auth router parses header correctly")
+    // @Test
     // This test requires URLRequestData which needs different handling
     // func testBearerAuthRouterParsing() throws {
     //     let router = BearerAuth.Router()
@@ -122,11 +122,11 @@ struct BearerAuthTests {
     // }
 }
 
-@Suite("Authentication Credentials Tests")
-struct AuthenticationCredentialsTests {
+@Suite
+struct Test {
 
-    @Test("Creates credentials with username and password")
-    func testCredentialsCreation() {
+    @Test
+    func `Creates credentials with username and password`() {
         let username = "user@example.com"
         let password = "password123"
         let credentials = Identity.Authentication.Credentials(
@@ -138,8 +138,8 @@ struct AuthenticationCredentialsTests {
         #expect(credentials.password == password)
     }
 
-    @Test("Credentials equality")
-    func testCredentialsEquality() {
+    @Test
+    func `Credentials equality`() {
         let creds1 = Identity.Authentication.Credentials(
             username: "user@example.com",
             password: "password123"
@@ -152,8 +152,8 @@ struct AuthenticationCredentialsTests {
         #expect(creds1 == creds2)
     }
 
-    @Test("Credentials inequality with different username")
-    func testCredentialsInequalityUsername() {
+    @Test
+    func `Credentials inequality with different username`() {
         let creds1 = Identity.Authentication.Credentials(
             username: "user1@example.com",
             password: "password123"
@@ -166,8 +166,8 @@ struct AuthenticationCredentialsTests {
         #expect(creds1 != creds2)
     }
 
-    @Test("Credentials inequality with different password")
-    func testCredentialsInequalityPassword() {
+    @Test
+    func `Credentials inequality with different password`() {
         let creds1 = Identity.Authentication.Credentials(
             username: "user@example.com",
             password: "password123"
@@ -180,8 +180,8 @@ struct AuthenticationCredentialsTests {
         #expect(creds1 != creds2)
     }
 
-    @Test("Credentials encoding and decoding")
-    func testCredentialsCodable() throws {
+    @Test
+    func `Credentials encoding and decoding`() throws {
         let credentials = Identity.Authentication.Credentials(
             username: "user@example.com",
             password: "securePassword123"

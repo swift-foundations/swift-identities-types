@@ -10,13 +10,13 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Identity View Router Tests")
-struct ViewRouterTests {
+@Suite
+struct Test {
 
     let router = Identity.View.Router()
 
-    @Test("Parse basic MFA routes")
-    func testBasicMFARoutes() throws {
+    @Test
+    func `Parse basic MFA routes`() throws {
         // Test /mfa/manage
         let managePath = "/mfa/manage"
         let request = URLRequestData(path: managePath)
@@ -45,8 +45,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Parse TOTP routes")
-    func testTOTPRoutes() throws {
+    @Test
+    func `Parse TOTP routes`() throws {
         // Test /mfa/totp/setup
         let setupPath = "/mfa/totp/setup"
         let setupRequest = URLRequestData(path: setupPath)
@@ -78,8 +78,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Parse backup codes display route")
-    func testBackupCodesDisplayRoute() throws {
+    @Test
+    func `Parse backup codes display route`() throws {
         // Test /mfa/backup-codes (display)
         let displayPath = "/mfa/backup-codes"
         let displayRequest = URLRequestData(path: displayPath)
@@ -91,8 +91,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Parse backup codes verify route")
-    func testBackupCodesVerifyRoute() throws {
+    @Test
+    func `Parse backup codes verify route`() throws {
         // Test /mfa/backup-codes/verify with query params
         let verifyPath = "/mfa/backup-codes/verify"
         let verifyRequest = URLRequestData(
@@ -109,8 +109,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Parse backup codes verify route without attempts remaining")
-    func testBackupCodesVerifyRouteDefaultAttempts() throws {
+    @Test
+    func `Parse backup codes verify route without attempts remaining`() throws {
         // Test /mfa/backup-codes/verify with only sessionToken (default attemptsRemaining)
         let verifyPath = "/mfa/backup-codes/verify"
         let verifyRequest = URLRequestData(
@@ -129,8 +129,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Generate URLs for backup codes routes")
-    func testGenerateBackupCodesURLs() throws {
+    @Test
+    func `Generate URLs for backup codes routes`() throws {
         // Test generating display URL.
         //
         // W3 semantic note: PointFree's `OneOf` printed via the LAST matching branch,
@@ -154,8 +154,8 @@ struct ViewRouterTests {
         #expect(verifyURL.query["attemptsRemaining"]?.first == "2")
     }
 
-    @Test("Parse authentication routes")
-    func testAuthenticationRoutes() throws {
+    @Test
+    func `Parse authentication routes`() throws {
         // Test /login
         let loginPath = "/login"
         let loginRequest = URLRequestData(path: loginPath)
@@ -187,8 +187,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Parse account management routes")
-    func testAccountManagementRoutes() throws {
+    @Test
+    func `Parse account management routes`() throws {
         // Test /create/request
         let createPath = "/create/request"
         let createRequest = URLRequestData(path: createPath)
@@ -230,8 +230,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Comprehensive backup codes route parsing")
-    func testComprehensiveBackupCodesRouting() throws {
+    @Test
+    func `Comprehensive backup codes route parsing`() throws {
         // Test various URL formats for backup codes
         let testCases: [(request: URLRequestData, isDisplay: Bool, description: String)] = [
             (URLRequestData(path: "/mfa/backup-codes"), true, "Display route"),
@@ -280,8 +280,8 @@ struct ViewRouterTests {
         }
     }
 
-    @Test("Round-trip routing for backup codes")
-    func testRoundTripBackupCodesRouting() throws {
+    @Test
+    func `Round-trip routing for backup codes`() throws {
         // Test display route round-trip
         let displayRoute = Identity.View.mfa(.backupCodes(.display))
         let displayURL = try router.print(displayRoute)

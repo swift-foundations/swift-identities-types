@@ -13,16 +13,16 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Identity API Router Tests", .dependencies)
-struct IdentityAPIRouterTests {
+@Suite( .dependencies
+struct Test {
 
     var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Route> {
         @Dependency(\.identity) var identity
         return identity.router
     }
 
-    @Test("Creates correct URL for authenticate credentials")
-    func testAuthenticateCredentialsURL() throws {
+    @Test
+    func `Creates correct URL for authenticate credentials`() throws {
         let api: Identity.API = .authenticate(
             .credentials(
                 .init(username: "user@example.com", password: "password123")
@@ -39,8 +39,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.authenticate.api.credentials.extract(match)?.password == "password123")
     }
 
-    @Test("Creates correct URL for authenticate API key")
-    func testAuthenticateAPIKeyURL() throws {
+    @Test
+    func `Creates correct URL for authenticate API key`() throws {
         let api: Identity.API = .authenticate(.apiKey(try .init(token: "test-api-key")))
 
         let request = try router.request(for: .api(api))
@@ -51,8 +51,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.authenticate.api.apiKey.extract(match)?.token == "test-api-key")
     }
 
-    @Test("Creates correct URL for identity creation request")
-    func testCreateRequestURL() throws {
+    @Test
+    func `Creates correct URL for identity creation request`() throws {
         let api: Identity.API = .create(
             .request(
                 .init(email: "new@example.com", password: "password123")
@@ -69,8 +69,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.create.api.request.extract(match)?.password == "password123")
     }
 
-    @Test("Creates correct URL for identity creation verification")
-    func testCreateVerificationURL() throws {
+    @Test
+    func `Creates correct URL for identity creation verification`() throws {
         let api: Identity.API = .create(
             .verify(
                 .init(token: "verification-token", email: "verify@example.com")
@@ -87,8 +87,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.create.api.verify.extract(match)?.token == "verification-token")
     }
 
-    @Test("Creates correct URL for password reset request")
-    func testPasswordResetRequestURL() throws {
+    @Test
+    func `Creates correct URL for password reset request`() throws {
         let api: Identity.API = .password(
             .reset(
                 .request(
@@ -106,8 +106,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.password.api.reset.request.extract(match)?.email == "reset@example.com")
     }
 
-    @Test("Creates correct URL for password reset confirmation")
-    func testPasswordResetConfirmURL() throws {
+    @Test
+    func `Creates correct URL for password reset confirmation`() throws {
         let api: Identity.API = .password(
             .reset(
                 .confirm(
@@ -126,8 +126,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.password.api.reset.confirm.extract(match)?.token == "reset-token")
     }
 
-    @Test("Creates correct URL for password change request")
-    func testPasswordChangeRequestURL() throws {
+    @Test
+    func `Creates correct URL for password change request`() throws {
         let api: Identity.API = .password(
             .change(
                 .request(
@@ -146,8 +146,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.password.api.change.request.extract(match)?.newPassword == "new123")
     }
 
-    @Test("Creates correct URL for email change request")
-    func testEmailChangeRequestURL() throws {
+    @Test
+    func `Creates correct URL for email change request`() throws {
         let api: Identity.API = .email(
             .change(
                 .request(
@@ -165,8 +165,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.email.api.change.request.extract(match)?.newEmail == "newemail@example.com")
     }
 
-    @Test("Creates correct URL for email change confirmation")
-    func testEmailChangeConfirmURL() throws {
+    @Test
+    func `Creates correct URL for email change confirmation`() throws {
         let api: Identity.API = .email(
             .change(
                 .confirm(
@@ -184,8 +184,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.email.api.change.confirm.extract(match)?.token == "email-change-token")
     }
 
-    @Test("Creates correct URL for delete request")
-    func testDeleteRequestURL() throws {
+    @Test
+    func `Creates correct URL for delete request`() throws {
         let api: Identity.API = .delete(
             .request(
                 .init(reauthToken: "reauth-token-123")
@@ -201,8 +201,8 @@ struct IdentityAPIRouterTests {
         #expect(Identity.Route.cases.delete.api.request.extract(match)?.reauthToken == "reauth-token-123")
     }
 
-    @Test("Creates correct URL for delete confirmation")
-    func testDeleteConfirmURL() throws {
+    @Test
+    func `Creates correct URL for delete confirmation`() throws {
         let api: Identity.API = .delete(.confirm)
 
         let request = try router.request(for: .api(api))
@@ -213,8 +213,8 @@ struct IdentityAPIRouterTests {
         #expect(match.is(\.delete.api.confirm))
     }
 
-    @Test("Creates correct URL for delete cancellation")
-    func testDeleteCancelURL() throws {
+    @Test
+    func `Creates correct URL for delete cancellation`() throws {
         let api: Identity.API = .delete(.cancel)
 
         let request = try router.request(for: .api(api))
@@ -225,8 +225,8 @@ struct IdentityAPIRouterTests {
         #expect(match.is(\.delete.api.cancel))
     }
 
-    @Test("Creates correct URL for logout current session")
-    func testLogoutCurrentURL() throws {
+    @Test
+    func `Creates correct URL for logout current session`() throws {
         let api: Identity.API = .logout(.current)
 
         let request = try router.request(for: .api(api))
@@ -237,8 +237,8 @@ struct IdentityAPIRouterTests {
         #expect(match.is(\.logout.api.current))
     }
 
-    @Test("Creates correct URL for logout all sessions")
-    func testLogoutAllURL() throws {
+    @Test
+    func `Creates correct URL for logout all sessions`() throws {
         let api: Identity.API = .logout(.all)
 
         let request = try router.request(for: .api(api))
@@ -249,8 +249,8 @@ struct IdentityAPIRouterTests {
         #expect(match.is(\.logout.api.all))
     }
 
-    @Test("Creates correct URL for reauthorization")
-    func testReauthorizeURL() throws {
+    @Test
+    func `Creates correct URL for reauthorization`() throws {
         let api: Identity.API = .reauthorize(
             .init(password: "password123")
         )

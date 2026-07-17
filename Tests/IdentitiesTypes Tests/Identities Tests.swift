@@ -14,12 +14,12 @@ import Testing
 @testable import IdentitiesTypes
 
 @Suite(
-    "Authentication Tests",
+
     .dependencies
 )
-struct AuthenticationTests {
-    @Test("Successfully authenticates with valid credentials")
-    func testValidCredentialsAuthentication() async throws {
+struct Test {
+    @Test
+    func `Successfully authenticates with valid credentials`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -37,8 +37,8 @@ struct AuthenticationTests {
         }
     }
 
-    @Test("Fails authentication with invalid credentials")
-    func testInvalidCredentialsAuthentication() async throws {
+    @Test
+    func `Fails authentication with invalid credentials`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -50,8 +50,8 @@ struct AuthenticationTests {
         }
     }
 
-    @Test("Successfully authenticates with API key")
-    func testApiKeyAuthentication() async throws {
+    @Test
+    func `Successfully authenticates with API key`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -66,8 +66,8 @@ struct AuthenticationTests {
         }
     }
 
-    @Test("Successfully refreshes token")
-    func testTokenRefresh() async throws {
+    @Test
+    func `Successfully refreshes token`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -89,12 +89,12 @@ struct AuthenticationTests {
 }
 
 @Suite(
-    "Identity Creation Tests",
+
     .dependencies
 )
-struct IdentityCreationTests {
-    @Test("Successfully creates new identity")
-    func testIdentityCreation() async throws {
+struct Test {
+    @Test
+    func `Successfully creates new identity`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -111,8 +111,8 @@ struct IdentityCreationTests {
         }
     }
 
-    @Test("Fails verification with invalid token")
-    func testInvalidVerificationToken() async throws {
+    @Test
+    func `Fails verification with invalid token`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -128,8 +128,8 @@ struct IdentityCreationTests {
         }
     }
 
-    @Test("Prevents duplicate email registration")
-    func testDuplicateEmailPrevention() async throws {
+    @Test
+    func `Prevents duplicate email registration`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -146,12 +146,12 @@ struct IdentityCreationTests {
 }
 
 @Suite(
-    "Password Management Tests",
+
     .dependencies
 )
-struct PasswordManagementTests {
-    @Test("Successfully completes password reset flow")
-    func testPasswordResetFlow() async throws {
+struct Test {
+    @Test
+    func `Successfully completes password reset flow`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -186,8 +186,8 @@ struct PasswordManagementTests {
         }
     }
 
-    @Test("Successfully changes password for authenticated user")
-    func testPasswordChange() async throws {
+    @Test
+    func `Successfully changes password for authenticated user`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -221,8 +221,8 @@ struct PasswordManagementTests {
         }
     }
 
-    @Test("Fails password reset with invalid token")
-    func testInvalidResetToken() async throws {
+    @Test
+    func `Fails password reset with invalid token`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity
@@ -239,12 +239,12 @@ struct PasswordManagementTests {
 }
 
 @Suite(
-    "Email Management Tests",
+
     .dependencies
 )
-struct EmailManagementTests {
-    @Test("Successfully completes email change flow")
-    func testEmailChangeFlow() async throws {
+struct Test {
+    @Test
+    func `Successfully completes email change flow`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
 
             @Dependency(\.identity) var identity

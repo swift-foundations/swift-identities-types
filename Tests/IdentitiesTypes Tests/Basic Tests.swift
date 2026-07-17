@@ -13,11 +13,11 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Basic Authentication Tests")
-struct BasicAuthenticationTests {
+@Suite
+struct Test {
 
-    @Test("Authentication response with string tokens")
-    func testAuthenticationResponse() {
+    @Test
+    func `Authentication response with string tokens`() {
         let response = Identity.Authentication.Response(
             accessToken: "access.token.string",
             refreshToken: "refresh.token.string"
@@ -29,8 +29,8 @@ struct BasicAuthenticationTests {
         #expect(response.refreshToken.isEmpty == false)
     }
 
-    @Test("Authentication response equality")
-    func testAuthenticationResponseEquality() {
+    @Test
+    func `Authentication response equality`() {
         let response1 = Identity.Authentication.Response(
             accessToken: "token1",
             refreshToken: "token2"
@@ -43,8 +43,8 @@ struct BasicAuthenticationTests {
         #expect(response1 == response2)
     }
 
-    @Test("Authentication response encoding and decoding")
-    func testAuthenticationResponseCodable() throws {
+    @Test
+    func `Authentication response encoding and decoding`() throws {
         let response = Identity.Authentication.Response(
             accessToken: "access.jwt.token",
             refreshToken: "refresh.jwt.token"
@@ -62,11 +62,11 @@ struct BasicAuthenticationTests {
     }
 }
 
-@Suite("Basic Identity Tests", .dependencies)
-struct BasicIdentityTests {
+@Suite( .dependencies
+struct Test {
 
-    @Test("Successfully authenticates with valid credentials")
-    func testValidCredentialsAuthentication() async throws {
+    @Test
+    func `Successfully authenticates with valid credentials`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -86,8 +86,8 @@ struct BasicIdentityTests {
         }
     }
 
-    @Test("Fails authentication with invalid credentials")
-    func testInvalidCredentialsAuthentication() async throws {
+    @Test
+    func `Fails authentication with invalid credentials`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -97,8 +97,8 @@ struct BasicIdentityTests {
         }
     }
 
-    @Test("Successfully creates new identity")
-    func testIdentityCreation() async throws {
+    @Test
+    func `Successfully creates new identity`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 

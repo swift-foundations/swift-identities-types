@@ -14,19 +14,19 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("README Verification Tests", .dependencies)
-struct ReadmeVerificationTests {
+@Suite( .dependencies
+struct Test {
 
     // MARK: - Quick Start Examples
 
-    @Test("README lines 40-42: Import module")
-    func testImportModule() {
+    @Test
+    func `README lines 40-42: Import module`() {
         // Verifies the module can be imported
         let _: Identity.Type = Identity.self
     }
 
-    @Test("README lines 49-66: Using main Identity type")
-    func testMainIdentityType() async throws {
+    @Test
+    func `README lines 49-66: Using main Identity type`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -53,8 +53,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Authentication Examples
 
-    @Test("README lines 75-93: Credentials-based authentication")
-    func testCredentialsAuthentication() async throws {
+    @Test
+    func `README lines 75-93: Credentials-based authentication`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -86,8 +86,8 @@ struct ReadmeVerificationTests {
         }
     }
 
-    @Test("README lines 98-103: Token-based authentication")
-    func testTokenAuthentication() async throws {
+    @Test
+    func `README lines 98-103: Token-based authentication`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -116,8 +116,8 @@ struct ReadmeVerificationTests {
         }
     }
 
-    @Test("README lines 108-110: API key authentication")
-    func testAPIKeyAuthentication() async throws {
+    @Test
+    func `README lines 108-110: API key authentication`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -132,8 +132,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Identity Creation Examples
 
-    @Test("README lines 117-134: Identity creation flow")
-    func testIdentityCreation() async throws {
+    @Test
+    func `README lines 117-134: Identity creation flow`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -160,8 +160,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Password Management Examples
 
-    @Test("README lines 141-151: Password reset flow")
-    func testPasswordReset() async throws {
+    @Test
+    func `README lines 141-151: Password reset flow`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -195,8 +195,8 @@ struct ReadmeVerificationTests {
         }
     }
 
-    @Test("README lines 156-161: Password change for authenticated user")
-    func testPasswordChange() async throws {
+    @Test
+    func `README lines 156-161: Password change for authenticated user`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -233,8 +233,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Email Management Examples
 
-    @Test("README lines 166-176: Email management")
-    func testEmailManagement() async throws {
+    @Test
+    func `README lines 166-176: Email management`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -271,8 +271,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Identity Deletion Examples
 
-    @Test("README lines 181-191: Identity deletion")
-    func testIdentityDeletion() async throws {
+    @Test
+    func `README lines 181-191: Identity deletion`() async throws {
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
 
@@ -312,8 +312,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Reauthorization Examples
 
-    @Test("README lines 198-209: Reauthorization for sensitive operations")
-    func testReauthorization() async throws {
+    @Test
+    func `README lines 198-209: Reauthorization for sensitive operations`() async throws {
         // Test the type signatures compile correctly
         @Dependency(\.identity) var identity
 
@@ -330,8 +330,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - URL Routing Examples
 
-    @Test("README lines 216-236: Type-safe URL routing")
-    func testTypesSafeRouting() throws {
+    @Test
+    func `README lines 216-236: Type-safe URL routing`() throws {
         @Dependency(\.identity) var identity
         let router = identity.router
 
@@ -359,8 +359,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - MFA Examples
 
-    @Test("README lines 243-254: Multi-factor authentication")
-    func testMFATypes() {
+    @Test
+    func `README lines 243-254: Multi-factor authentication`() {
         // MFA types compile and are accessible
         let _: Identity.MFA.Method = .totp
         let _: Identity.MFA.Method = .sms
@@ -381,8 +381,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Testing Examples
 
-    @Test("README lines 260-290: Testing with mock clients")
-    func testMockClientPattern() async throws {
+    @Test
+    func `README lines 260-290: Testing with mock clients`() async throws {
         // Use test dependency key
         try await Identity._TestDatabase.Helper.withIsolatedDatabase {
             @Dependency(\.identity) var identity
@@ -410,8 +410,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Type Structure Tests
 
-    @Test("README lines 299-320: Domain architecture")
-    func testDomainArchitecture() {
+    @Test
+    func `README lines 299-320: Domain architecture`() {
         @Dependency(\.identity) var identity
 
         // Verify main Identity structure
@@ -435,8 +435,8 @@ struct ReadmeVerificationTests {
         let _: Identity.OAuth? = identity.oauth
     }
 
-    @Test("README lines 329-335: Type safety features")
-    func testTypeSafety() {
+    @Test
+    func `README lines 329-335: Type safety features`() {
         // All types are Sendable
         let _: any Sendable = Identity.Authentication.Credentials(
             username: "user@example.com",
@@ -463,8 +463,8 @@ struct ReadmeVerificationTests {
 
     // MARK: - Additional Type Tests
 
-    @Test("Verify Identity.Authentication.Response type")
-    func testAuthenticationResponse() throws {
+    @Test
+    func `Verify Identity.Authentication.Response type`() throws {
         let response = Identity.Authentication.Response(
             accessToken: "test-access-token",
             refreshToken: "test-refresh-token"
@@ -483,8 +483,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == response)
     }
 
-    @Test("Verify Identity.Creation.Request type")
-    func testCreationRequest() throws {
+    @Test
+    func `Verify Identity.Creation.Request type`() throws {
         let request = Identity.Creation.Request(
             email: "new@example.com",
             password: "password123"
@@ -503,8 +503,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == request)
     }
 
-    @Test("Verify Identity.Creation.Verification type")
-    func testCreationVerification() throws {
+    @Test
+    func `Verify Identity.Creation.Verification type`() throws {
         let verification = Identity.Creation.Verification(
             token: "verification-token",
             email: "verify@example.com"
@@ -523,8 +523,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == verification)
     }
 
-    @Test("Verify Identity.Password.Reset.Request type")
-    func testPasswordResetRequest() throws {
+    @Test
+    func `Verify Identity.Password.Reset.Request type`() throws {
         let request = Identity.Password.Reset.Request(
             email: "reset@example.com"
         )
@@ -541,8 +541,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == request)
     }
 
-    @Test("Verify Identity.Password.Reset.Confirm type")
-    func testPasswordResetConfirm() throws {
+    @Test
+    func `Verify Identity.Password.Reset.Confirm type`() throws {
         let confirm = Identity.Password.Reset.Confirm(
             token: "reset-token",
             newPassword: "newPassword123"
@@ -561,8 +561,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == confirm)
     }
 
-    @Test("Verify Identity.Password.Change.Request type")
-    func testPasswordChangeRequest() throws {
+    @Test
+    func `Verify Identity.Password.Change.Request type`() throws {
         let request = Identity.Password.Change.Request(
             currentPassword: "current123",
             newPassword: "new123"
@@ -581,8 +581,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == request)
     }
 
-    @Test("Verify Identity.Email.Change.Request type")
-    func testEmailChangeRequest() throws {
+    @Test
+    func `Verify Identity.Email.Change.Request type`() throws {
         let request = Identity.Email.Change.Request(
             newEmail: "newemail@example.com"
         )
@@ -599,8 +599,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == request)
     }
 
-    @Test("Verify Identity.Email.Change.Confirmation type")
-    func testEmailChangeConfirmation() throws {
+    @Test
+    func `Verify Identity.Email.Change.Confirmation type`() throws {
         let confirmation = Identity.Email.Change.Confirmation(
             token: "confirmation-token"
         )
@@ -617,8 +617,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == confirmation)
     }
 
-    @Test("Verify Identity.Deletion.Request type")
-    func testDeletionRequest() throws {
+    @Test
+    func `Verify Identity.Deletion.Request type`() throws {
         let request = Identity.Deletion.Request(
             reauthToken: "reauth-token-123"
         )
@@ -635,8 +635,8 @@ struct ReadmeVerificationTests {
         #expect(decoded == request)
     }
 
-    @Test("Verify Identity.Reauthorization.Request type")
-    func testReauthorizationRequest() throws {
+    @Test
+    func `Verify Identity.Reauthorization.Request type`() throws {
         let request = Identity.Reauthorization.Request(
             password: "password123"
         )

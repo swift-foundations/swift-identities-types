@@ -10,11 +10,11 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Detailed Route Debug")
-struct DetailedRouteDebug {
+@Suite
+struct `Detailed Route Debug` {
 
-    @Test("Debug backup codes routing issue")
-    func debugBackupCodesRoute() throws {
+    @Test
+    func `Debug backup codes routing issue`() throws {
         print("\n=== DEBUGGING BACKUP CODES ROUTE ===\n")
 
         let viewRouter = Identity.View.Router()

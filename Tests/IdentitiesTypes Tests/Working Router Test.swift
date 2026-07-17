@@ -10,11 +10,11 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Working Router Test")
-struct WorkingRouterTest {
+@Suite
+struct `Working Router Test` {
 
-    @Test("Basic router test")
-    func testBasicRouter() throws {
+    @Test
+    func `Basic router test`() throws {
         let router = Identity.API.Router()
 
         // Create a simple API request

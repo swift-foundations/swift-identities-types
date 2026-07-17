@@ -13,13 +13,13 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Simple Identity API Router Tests")
-struct SimpleIdentityAPIRouterTests {
+@Suite
+struct Test {
 
     let router: Identity.API.Router = .init()
 
-    @Test("Creates correct URL for authenticate credentials")
-    func testAuthenticateCredentialsURL() throws {
+    @Test
+    func `Creates correct URL for authenticate credentials`() throws {
         let api: Identity.API = .authenticate(
             .credentials(
                 .init(username: "user@example.com", password: "password123")
@@ -37,8 +37,8 @@ struct SimpleIdentityAPIRouterTests {
         #expect(Identity.API.cases.authenticate.credentials.extract(match)?.password == "password123")
     }
 
-    @Test("Creates correct URL for logout")
-    func testLogoutURL() throws {
+    @Test
+    func `Creates correct URL for logout`() throws {
         let api: Identity.API = .logout(.current)
 
         let request = try router.request(for: api)

@@ -13,11 +13,11 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Identity Creation Model Tests")
-struct IdentityCreationModelTests {
+@Suite
+struct Test {
 
-    @Test("Creates identity creation request")
-    func testCreationRequestModel() {
+    @Test
+    func `Creates identity creation request`() {
         let request = Identity.Creation.Request(
             email: "new@example.com",
             password: "password123"
@@ -27,8 +27,8 @@ struct IdentityCreationModelTests {
         #expect(request.password == "password123")
     }
 
-    @Test("Creates identity verification request")
-    func testVerificationRequestModel() {
+    @Test
+    func `Creates identity verification request`() {
         let verification = Identity.Creation.Verification(
             token: "verification-token-123",
             email: "verify@example.com"
@@ -38,8 +38,8 @@ struct IdentityCreationModelTests {
         #expect(verification.token == "verification-token-123")
     }
 
-    @Test("Creation request encoding and decoding")
-    func testCreationRequestCodable() throws {
+    @Test
+    func `Creation request encoding and decoding`() throws {
         let request = Identity.Creation.Request(
             email: "test@example.com",
             password: "securePass123"
@@ -56,8 +56,8 @@ struct IdentityCreationModelTests {
         #expect(decodedRequest == request)
     }
 
-    @Test("Verification request encoding and decoding")
-    func testVerificationCodable() throws {
+    @Test
+    func `Verification request encoding and decoding`() throws {
         let verification = Identity.Creation.Verification(
             token: "token-456",
             email: "verify@example.com"
@@ -78,11 +78,11 @@ struct IdentityCreationModelTests {
     }
 }
 
-@Suite("Identity Password Model Tests")
-struct IdentityPasswordModelTests {
+@Suite
+struct Test {
 
-    @Test("Creates password reset confirmation")
-    func testPasswordResetConfirmation() {
+    @Test
+    func `Creates password reset confirmation`() {
         let confirmation = Identity.Password.Reset.Confirm(
             token: "reset-token-abc",
             newPassword: "newPassword123"
@@ -92,8 +92,8 @@ struct IdentityPasswordModelTests {
         #expect(confirmation.token == "reset-token-abc")
     }
 
-    @Test("Creates password change request")
-    func testPasswordChangeRequest() {
+    @Test
+    func `Creates password change request`() {
         let changeRequest = Identity.Password.Change.Request(
             currentPassword: "current123",
             newPassword: "new456"
@@ -103,8 +103,8 @@ struct IdentityPasswordModelTests {
         #expect(changeRequest.newPassword == "new456")
     }
 
-    @Test("Password reset confirmation encoding and decoding")
-    func testPasswordResetConfirmationCodable() throws {
+    @Test
+    func `Password reset confirmation encoding and decoding`() throws {
         let confirmation = Identity.Password.Reset.Confirm(
             token: "token-xyz",
             newPassword: "newSecurePass"
@@ -124,8 +124,8 @@ struct IdentityPasswordModelTests {
         #expect(decodedConfirmation == confirmation)
     }
 
-    @Test("Password change request encoding and decoding")
-    func testPasswordChangeRequestCodable() throws {
+    @Test
+    func `Password change request encoding and decoding`() throws {
         let changeRequest = Identity.Password.Change.Request(
             currentPassword: "oldPass",
             newPassword: "newPass"
@@ -143,11 +143,11 @@ struct IdentityPasswordModelTests {
     }
 }
 
-@Suite("Identity Deletion Model Tests")
-struct IdentityDeletionModelTests {
+@Suite
+struct Test {
 
-    @Test("Creates deletion request")
-    func testDeletionRequest() {
+    @Test
+    func `Creates deletion request`() {
         let request = Identity.Deletion.Request(
             reauthToken: "reauth-token-123"
         )
@@ -157,8 +157,8 @@ struct IdentityDeletionModelTests {
 
     // Test removed - Deletion.Request only has reauthToken parameter
 
-    @Test("Deletion request encoding and decoding")
-    func testDeletionRequestCodable() throws {
+    @Test
+    func `Deletion request encoding and decoding`() throws {
         let request = Identity.Deletion.Request(
             reauthToken: "reauth-token-456"
         )
@@ -176,18 +176,18 @@ struct IdentityDeletionModelTests {
     // Test removed - Deletion.Request only has reauthToken parameter
 }
 
-@Suite("Identity Reauthorization Model Tests")
-struct IdentityReauthorizationModelTests {
+@Suite
+struct Test {
 
-    @Test("Creates reauthorization request")
-    func testReauthorizationRequest() {
+    @Test
+    func `Creates reauthorization request`() {
         let request = Identity.Reauthorization.Request(password: "password123")
 
         #expect(request.password == "password123")
     }
 
-    @Test("Reauthorization request encoding and decoding")
-    func testReauthorizationCodable() throws {
+    @Test
+    func `Reauthorization request encoding and decoding`() throws {
         let request = Identity.Reauthorization.Request(password: "securePassword")
 
         let encoder = JSONEncoder()
@@ -201,11 +201,11 @@ struct IdentityReauthorizationModelTests {
     }
 }
 
-@Suite("Identity MFA Model Tests")
-struct IdentityMFAModelTests {
+@Suite
+struct Test {
 
-    @Test("Creates TOTP setup response")
-    func testTOTPSetupResponse() throws {
+    @Test
+    func `Creates TOTP setup response`() throws {
         let qrCodeURL = URL(
             string: "otpauth://totp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Example"
         )!
@@ -220,8 +220,8 @@ struct IdentityMFAModelTests {
         #expect(response.manualEntryKey == "JBSW Y3DP EHPK 3PXP")
     }
 
-    @Test("TOTP setup response encoding and decoding")
-    func testTOTPSetupResponseCodable() throws {
+    @Test
+    func `TOTP setup response encoding and decoding`() throws {
         let qrCodeURL = URL(string: "otpauth://totp/Test:test@example.com")!
         let response = Identity.MFA.TOTP.SetupResponse(
             secret: "SECRET123",
@@ -241,8 +241,8 @@ struct IdentityMFAModelTests {
         #expect(decodedResponse == response)
     }
 
-    @Test("Creates MFA status response")
-    func testMFAStatusResponse() {
+    @Test
+    func `Creates MFA status response`() {
         let configured = Identity.MFA.Status.ConfiguredMethods(
             totp: true,
             sms: false,
@@ -263,8 +263,8 @@ struct IdentityMFAModelTests {
         #expect(status.isRequired == true)
     }
 
-    @Test("MFA status encoding and decoding")
-    func testMFAStatusCodable() throws {
+    @Test
+    func `MFA status encoding and decoding`() throws {
         let configured = Identity.MFA.Status.ConfiguredMethods(
             totp: true,
             sms: true,

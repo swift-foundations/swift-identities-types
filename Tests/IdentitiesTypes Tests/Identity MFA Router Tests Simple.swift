@@ -13,13 +13,13 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite("Simple MFA Router Tests")
-struct SimpleMFARouterTests {
+@Suite
+struct Test {
 
     let router: Identity.MFA.API.Router = .init()
 
-    @Test("Creates correct URL for MFA status get")
-    func testMFAStatusGet() throws {
+    @Test
+    func `Creates correct URL for MFA status get`() throws {
         let mfa: Identity.MFA.API = .status(.get)
 
         let request = try router.request(for: mfa)
@@ -27,8 +27,8 @@ struct SimpleMFARouterTests {
         #expect(request.httpMethod == "GET")
     }
 
-    @Test("Creates correct URL for MFA TOTP setup")
-    func testMFATOTPSetup() throws {
+    @Test
+    func `Creates correct URL for MFA TOTP setup`() throws {
         let mfa: Identity.MFA.API = .totp(.setup)
 
         let request = try router.request(for: mfa)
@@ -36,8 +36,8 @@ struct SimpleMFARouterTests {
         #expect(request.httpMethod == "POST")
     }
 
-    @Test("Creates correct URL for MFA backup codes regenerate")
-    func testMFABackupCodesRegenerate() throws {
+    @Test
+    func `Creates correct URL for MFA backup codes regenerate`() throws {
         let mfa: Identity.MFA.API = .backupCodes(.regenerate)
 
         let request = try router.request(for: mfa)
@@ -45,8 +45,8 @@ struct SimpleMFARouterTests {
         #expect(request.httpMethod == "POST")
     }
 
-    @Test("Creates correct URL for MFA WebAuthn begin registration")
-    func testMFAWebAuthnBeginRegistration() throws {
+    @Test
+    func `Creates correct URL for MFA Web Authn begin registration`() throws {
         let mfa: Identity.MFA.API = .webauthn(.beginRegistration)
 
         let request = try router.request(for: mfa)
