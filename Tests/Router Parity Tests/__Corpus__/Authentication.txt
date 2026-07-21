@@ -1,0 +1,26 @@
+== api.credentials ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/authenticate
+body(utf8): password=secret1234&username=user%40example.com
+
+== api.token.access ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/authenticate/access
+header: cookie: access_token="eyJhbGciOiJub25lIn0.eyJzdWIiOiJwYXJpdHkifQ.AQID"
+body: <nil>
+
+== api.token.refresh ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/authenticate/refresh
+body(utf8): "eyJhbGciOiJub25lIn0.eyJzdWIiOiJwYXJpdHkifQ.AQID"
+
+== api.apiKey ==
+method: <nil>
+path: /api/authenticate/api-key
+header: authorization: Bearer parity-token-123
+body: <nil>
+
+== view.credentials ==
+method: <nil>
+path: /login
+body: <nil>

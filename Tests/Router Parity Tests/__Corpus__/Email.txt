@@ -1,0 +1,24 @@
+== api.change.request ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/email/request
+body(utf8): newEmail=new%40example.com
+
+== api.change.confirm ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/email/confirm
+body(utf8): token=email-token-123
+
+== view.change.request ==
+method: <nil>
+path: /email/change/request
+body: <nil>
+
+== view.change.confirm ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /email/change/confirm/confirm
+body(utf8): token=email-token-123
+
+== view.change.reauthorization ==
+method: <nil>
+path: /email/change
+body: <nil>

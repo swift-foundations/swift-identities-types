@@ -1,0 +1,171 @@
+== api.totp.setup ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/totp/setup
+body: <nil>
+
+== api.totp.confirmSetup ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/totp/confirm
+body(utf8): code=123456
+
+== api.totp.verify ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/totp/verify
+body(utf8/sorted-keys): {"code":"123456","sessionToken":"session-token-123"}
+
+== api.totp.disable ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/totp/disable
+body(utf8/sorted-keys): {"reauthorizationToken":"reauth-token-123"}
+
+== api.sms.setup ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/sms/setup
+body(utf8/sorted-keys): {"phoneNumber":"+15555550100"}
+
+== api.sms.requestCode ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/sms/request
+body: <nil>
+
+== api.sms.verify ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/sms/verify
+body(utf8/sorted-keys): {"code":"123456","sessionToken":"session-token-123"}
+
+== api.sms.updatePhoneNumber ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/sms/update
+body(utf8/sorted-keys): {"phoneNumber":"+15555550101","reauthorizationToken":"reauth-token-123"}
+
+== api.sms.disable ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/sms/disable
+body(utf8/sorted-keys): {"reauthorizationToken":"reauth-token-123"}
+
+== api.email.setup ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/email/setup
+body(utf8/sorted-keys): {"email":"mfa@example.com"}
+
+== api.email.requestCode ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/email/request
+body: <nil>
+
+== api.email.verify ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/email/verify
+body(utf8/sorted-keys): {"code":"123456","sessionToken":"session-token-123"}
+
+== api.email.updateEmail ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/email/update
+body(utf8/sorted-keys): {"email":"mfa2@example.com","reauthorizationToken":"reauth-token-123"}
+
+== api.email.disable ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/email/disable
+body(utf8/sorted-keys): {"reauthorizationToken":"reauth-token-123"}
+
+== api.webauthn.beginRegistration ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/webauthn/register/begin
+body: <nil>
+
+== api.webauthn.finishRegistration ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/webauthn/register/finish
+body(utf8/sorted-keys): {"credentialName":"parity-key","response":"attestation-response"}
+
+== api.webauthn.beginAuthentication ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/webauthn/authenticate/begin
+body: <nil>
+
+== api.webauthn.finishAuthentication ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/webauthn/authenticate/finish
+body(utf8/sorted-keys): {"response":"assertion-response","sessionToken":"session-token-123"}
+
+== api.webauthn.listCredentials ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/mfa/webauthn/credentials
+body: <nil>
+
+== api.webauthn.removeCredential ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/webauthn/credentials/remove
+body(utf8/sorted-keys): {"credentialId":"credential-123","reauthorizationToken":"reauth-token-123"}
+
+== api.webauthn.disable ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/webauthn/disable
+body(utf8/sorted-keys): {"reauthorizationToken":"reauth-token-123"}
+
+== api.backupCodes.regenerate ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/backup-codes/regenerate
+body: <nil>
+
+== api.backupCodes.verify ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/backup-codes/verify
+body(utf8/sorted-keys): {"code":"backup-code-1","sessionToken":"session-token-123"}
+
+== api.backupCodes.remaining ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/mfa/backup-codes/remaining
+body: <nil>
+
+== api.status.get ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/mfa/status
+body: <nil>
+
+== api.status.challenge ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/mfa/status/challenge
+body: <nil>
+
+== api.verify ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/mfa/verify
+body(utf8): code=123456&method=totp&sessionToken=session-token-123
+
+== view.verify ==
+method: <nil>
+path: /mfa/verify
+query: sessionToken=session-token-123
+body: <nil>
+
+== view.manage ==
+method: <nil>
+path: /mfa/manage
+body: <nil>
+
+== view.totp.setup ==
+method: <nil>
+path: /mfa/totp/setup
+body: <nil>
+
+== view.totp.confirmSetup ==
+method: <nil>
+path: /mfa/totp/confirm-setup
+body: <nil>
+
+== view.totp.manage ==
+method: <nil>
+path: /mfa/totp/manage
+body: <nil>
+
+== view.backupCodes.display ==
+method: <nil>
+path: /mfa/backup-codes/display
+body: <nil>
+
+== view.backupCodes.verify ==
+method: <nil>
+path: /mfa/backup-codes/verify
+query: sessionToken=session-token-123
+body: <nil>

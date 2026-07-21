@@ -1,0 +1,21 @@
+== api.request ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/create/request
+body(utf8): email=user%40example.com&password=secret1234
+
+== api.verify ==
+method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+path: /api/create/verify
+body(utf8): email=user%40example.com&token=verify-token-123
+
+== view.request ==
+method: <nil>
+path: /create/request
+body: <nil>
+
+== view.verify ==
+method: <nil>
+path: /create/verify
+query: token=verify-token-123
+query: email=user@example.com
+body: <nil>

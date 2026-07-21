@@ -1,0 +1,49 @@
+== api.providers ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/oauth/providers
+body: <nil>
+
+== api.authorize ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/oauth/authorize/github
+body: <nil>
+
+== api.callback ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/oauth/callback
+query: code=oauth-code-123
+query: state=oauth-state-123
+body: <nil>
+
+== api.connections ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /api/oauth/connections
+body: <nil>
+
+== api.disconnect ==
+method: Method(rawValue: "DELETE", isSafe: false, isIdempotent: true, isCacheable: false)
+path: /api/oauth/disconnect/github
+body: <nil>
+
+== view.login ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /oauth/login
+body: <nil>
+
+== view.callback ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /oauth/callback
+query: code=oauth-code-123
+query: state=oauth-state-123
+body: <nil>
+
+== view.connections ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /oauth/connections
+body: <nil>
+
+== view.error ==
+method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+path: /oauth/error
+query: message=parity-error
+body: <nil>
