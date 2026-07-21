@@ -13,6 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.MFA.API {
 @Suite
 struct Test {
 
@@ -53,4 +54,5 @@ struct Test {
         #expect(request.url?.path == "/webauthn/register/begin")
         #expect(request.httpMethod == "POST")
     }
+}
 }

@@ -13,6 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.Creation.Request {
 @Suite
 struct Test {
 
@@ -77,7 +78,9 @@ struct Test {
         #expect(decodedVerification == verification)
     }
 }
+}
 
+extension Identity.Password.Change {
 @Suite
 struct Test {
 
@@ -142,7 +145,9 @@ struct Test {
         #expect(decodedRequest == changeRequest)
     }
 }
+}
 
+extension Identity.Deletion {
 @Suite
 struct Test {
 
@@ -175,7 +180,9 @@ struct Test {
 
     // Test removed - Deletion.Request only has reauthToken parameter
 }
+}
 
+extension Identity.Reauthorization {
 @Suite
 struct Test {
 
@@ -200,7 +207,9 @@ struct Test {
         #expect(decodedRequest == request)
     }
 }
+}
 
+extension Identity.MFA {
 @Suite
 struct Test {
 
@@ -295,4 +304,5 @@ struct Test {
     }
 
     // WebAuthn credential response tests removed - type not found in current implementation
+}
 }

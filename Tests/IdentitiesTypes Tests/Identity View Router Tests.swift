@@ -10,6 +10,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.View.Router {
 @Suite
 struct Test {
 
@@ -308,4 +309,5 @@ struct Test {
             Issue.record("Round-trip failed for verify route")
         }
     }
+}
 }

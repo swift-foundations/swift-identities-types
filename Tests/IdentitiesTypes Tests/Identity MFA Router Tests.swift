@@ -13,6 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.MFA.API.Router {
 @Suite
 struct Test {
 
@@ -240,4 +241,5 @@ struct Test {
         let match = try router.match(request: request)
         #expect(match.is(\.webauthn.disable))
     }
+}
 }

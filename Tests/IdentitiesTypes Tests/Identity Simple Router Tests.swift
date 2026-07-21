@@ -13,6 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.API.Router {
 @Suite
 struct Test {
 
@@ -48,4 +49,5 @@ struct Test {
         let match = try router.match(request: request)
         #expect(match.is(\.logout.current))
     }
+}
 }

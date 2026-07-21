@@ -13,6 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.Authentication {
 @Suite
 struct Test {
 
@@ -61,8 +62,10 @@ struct Test {
         #expect(decoded == response)
     }
 }
+}
 
-@Suite( .dependencies
+extension Identity._TestDatabase {
+@Suite(.dependencies)
 struct Test {
 
     @Test
@@ -112,4 +115,5 @@ struct Test {
             #expect(response.accessToken.isEmpty == false)
         }
     }
+}
 }

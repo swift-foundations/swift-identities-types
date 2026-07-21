@@ -13,6 +13,7 @@ import Testing
 
 @testable import IdentitiesTypes
 
+extension Identity.Authentication.Client {
 @Suite(
 
     .dependencies
@@ -87,7 +88,9 @@ struct Test {
         }
     }
 }
+}
 
+extension Identity.Creation {
 @Suite(
 
     .dependencies
@@ -144,7 +147,9 @@ struct Test {
         }
     }
 }
+}
 
+extension Identity.Password {
 @Suite(
 
     .dependencies
@@ -237,7 +242,9 @@ struct Test {
         }
     }
 }
+}
 
+extension Identity.Email.Change {
 @Suite(
 
     .dependencies
@@ -281,4 +288,5 @@ struct Test {
 
         }
     }
+}
 }

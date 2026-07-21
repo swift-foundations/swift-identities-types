@@ -13,7 +13,8 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite( .dependencies
+extension Identity.Route {
+@Suite(.dependencies)
 struct Test {
 
     var router: AnyParserPrinter<RFC_3986.URI.Request.Data, Identity.Route> {
@@ -263,4 +264,5 @@ struct Test {
         #expect(match.is(\.reauthorize.api))
         #expect(Identity.Route.cases.reauthorize.api.extract(match)?.password == "password123")
     }
+}
 }

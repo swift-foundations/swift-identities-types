@@ -14,6 +14,7 @@ import Testing
 
 // JWT token tests removed since JWT is now just a String type alias
 
+extension Identity.Authentication.Response {
 @Suite
 struct Test {
 
@@ -62,7 +63,9 @@ struct Test {
         #expect(decodedResponse == response)
     }
 }
+}
 
+extension BearerAuth {
 @Suite
 struct Test {
 
@@ -121,7 +124,9 @@ struct Test {
     //     #expect(bearerAuth.token == "test-token-456")
     // }
 }
+}
 
+extension Identity.Authentication.Credentials {
 @Suite
 struct Test {
 
@@ -197,4 +202,5 @@ struct Test {
         #expect(decodedCreds.password == credentials.password)
         #expect(decodedCreds == credentials)
     }
+}
 }

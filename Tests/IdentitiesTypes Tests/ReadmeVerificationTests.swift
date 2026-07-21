@@ -14,7 +14,8 @@ import Testing
 
 @testable import IdentitiesTypes
 
-@Suite( .dependencies
+extension Identity {
+@Suite(.dependencies)
 struct Test {
 
     // MARK: - Quick Start Examples
@@ -652,4 +653,5 @@ struct Test {
 
         #expect(decoded == request)
     }
+}
 }
