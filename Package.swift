@@ -77,12 +77,12 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "Router Parity Tests",
+            name: "Identities Router Parity Tests",
             dependencies: [
                 .identitiesTypes,
                 .product(name: "URL Routing Test Support", package: "swift-url-routing")
             ],
-            path: "Tests/Router Parity Tests",
+            path: "Tests/Identities Router Parity Tests",
             exclude: ["__Corpus__"]
         )
     ],
