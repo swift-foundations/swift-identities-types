@@ -82,7 +82,7 @@ extension Identity.Deletion.Request {
             // `RFC_3986.URI.Routing.Error` (url-routing FormBodyRouteTests pattern).
             URLRouting.Route(.identity()) {
                 Method.post
-                URLRouting.Body(.form(Identity.Deletion.Request.self, decoder: .identities))
+                URLRouting.Body(coding: .form(Identity.Deletion.Request.self, decoder: .identities))
             }
         }
     }

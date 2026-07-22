@@ -95,7 +95,7 @@ extension Identity.Authentication.API {
             OneOf {
                 URLRouting.Route(.case(Identity.Authentication.API.cases.credentials)) {
                     Method.post
-                    URLRouting.Body(.form(Identity.Authentication.Credentials.self, decoder: .identities))
+                    URLRouting.Body(coding: .form(Identity.Authentication.Credentials.self, decoder: .identities))
                 }
 
                 URLRouting.Route(.case(Identity.Authentication.API.cases.token)) {
@@ -117,7 +117,7 @@ extension Identity.Authentication.API {
                         URLRouting.Route(.case(Identity.Authentication.API.Token.cases.refresh)) {
                             Path.refresh
                             OneOf {
-                                URLRouting.Body(.json(JWT.self))
+                                URLRouting.Body(coding: .json(JWT.self))
 
                                 Cookies {
                                     Field("refresh_token", .utf8.data.json(JWT.self))

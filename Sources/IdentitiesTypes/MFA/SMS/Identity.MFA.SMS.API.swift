@@ -41,7 +41,7 @@ extension Identity.MFA.SMS.API {
                 URLRouting.Route(.case(Identity.MFA.SMS.API.cases.setup)) {
                     Method.post
                     Path.setup
-                    URLRouting.Body(.json(Identity.MFA.SMS.Setup.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.SMS.Setup.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.SMS.API.cases.requestCode)) {
@@ -52,19 +52,19 @@ extension Identity.MFA.SMS.API {
                 URLRouting.Route(.case(Identity.MFA.SMS.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    URLRouting.Body(.json(Identity.MFA.SMS.Verify.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.SMS.Verify.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.SMS.API.cases.updatePhoneNumber)) {
                     Method.post
                     Path.update
-                    URLRouting.Body(.json(Identity.MFA.SMS.UpdatePhoneNumber.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.SMS.UpdatePhoneNumber.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.SMS.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

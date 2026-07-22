@@ -48,7 +48,7 @@ extension Identity.MFA.Verify {
             // `RFC_3986.URI.Routing.Error` (url-routing FormBodyRouteTests pattern).
             URLRouting.Route(.identity()) {
                 Method.post
-                URLRouting.Body(.form(Identity.MFA.Verify.self, decoder: .identities))
+                URLRouting.Body(coding: .form(Identity.MFA.Verify.self, decoder: .identities))
             }
         }
     }

@@ -54,7 +54,7 @@ extension Identity.Password.Change.Request {
             URLRouting.Route(.identity()) {
                 Method.post
                 Path { "request" }
-                URLRouting.Body(.form(Identity.Password.Change.Request.self, decoder: .identities))
+                URLRouting.Body(coding: .form(Identity.Password.Change.Request.self, decoder: .identities))
             }
         }
     }

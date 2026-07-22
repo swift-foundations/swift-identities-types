@@ -40,7 +40,7 @@ extension Identity.MFA.BackupCodes.API {
                 URLRouting.Route(.case(Identity.MFA.BackupCodes.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    URLRouting.Body(.json(Identity.MFA.BackupCodes.Verify.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.BackupCodes.Verify.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.BackupCodes.API.cases.remaining)) {

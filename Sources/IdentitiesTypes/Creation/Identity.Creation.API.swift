@@ -66,12 +66,12 @@ extension Identity.Creation.API {
                 URLRouting.Route(.case(Identity.Creation.API.cases.request)) {
                     Method.post
                     Path<PathBuilder.Component<String>>.request
-                    URLRouting.Body(.form(Identity.Creation.Request.self, decoder: .identities))
+                    URLRouting.Body(coding: .form(Identity.Creation.Request.self, decoder: .identities))
                 }
                 URLRouting.Route(.case(Identity.Creation.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    URLRouting.Body(.form(Identity.Creation.Verification.self, decoder: .identities))
+                    URLRouting.Body(coding: .form(Identity.Creation.Verification.self, decoder: .identities))
                 }
             }
         }

@@ -1,11 +1,13 @@
 == api.request ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /api/create/request
+header: content-type: application/x-www-form-urlencoded
 body(utf8): email=user%40example.com&password=secret1234
 
 == api.verify ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /api/create/verify
+header: content-type: application/x-www-form-urlencoded
 body(utf8): email=user%40example.com&token=verify-token-123
 
 == view.request ==

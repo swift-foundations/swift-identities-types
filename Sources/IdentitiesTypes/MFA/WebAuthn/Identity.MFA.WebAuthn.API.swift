@@ -54,7 +54,7 @@ extension Identity.MFA.WebAuthn.API {
                     Method.post
                     Path { "register" }
                     Path { "finish" }
-                    URLRouting.Body(.json(Identity.MFA.WebAuthn.FinishRegistration.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.WebAuthn.FinishRegistration.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.beginAuthentication)) {
@@ -67,7 +67,7 @@ extension Identity.MFA.WebAuthn.API {
                     Method.post
                     Path { "authenticate" }
                     Path { "finish" }
-                    URLRouting.Body(.json(Identity.MFA.WebAuthn.FinishAuthentication.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.WebAuthn.FinishAuthentication.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.listCredentials)) {
@@ -79,13 +79,13 @@ extension Identity.MFA.WebAuthn.API {
                     Method.post
                     Path { "credentials" }
                     Path { "remove" }
-                    URLRouting.Body(.json(Identity.MFA.WebAuthn.RemoveCredential.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.WebAuthn.RemoveCredential.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.WebAuthn.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

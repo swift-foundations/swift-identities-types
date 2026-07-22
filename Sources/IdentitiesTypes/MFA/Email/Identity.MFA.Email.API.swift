@@ -41,7 +41,7 @@ extension Identity.MFA.Email.API {
                 URLRouting.Route(.case(Identity.MFA.Email.API.cases.setup)) {
                     Method.post
                     Path.setup
-                    URLRouting.Body(.json(Identity.MFA.Email.Setup.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.Email.Setup.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.Email.API.cases.requestCode)) {
@@ -52,19 +52,19 @@ extension Identity.MFA.Email.API {
                 URLRouting.Route(.case(Identity.MFA.Email.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    URLRouting.Body(.json(Identity.MFA.Email.Verify.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.Email.Verify.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.Email.API.cases.updateEmail)) {
                     Method.post
                     Path.update
-                    URLRouting.Body(.json(Identity.MFA.Email.UpdateEmail.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.Email.UpdateEmail.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.Email.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

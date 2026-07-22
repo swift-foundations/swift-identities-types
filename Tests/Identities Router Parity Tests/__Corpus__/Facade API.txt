@@ -1,16 +1,19 @@
 == authenticate.credentials ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /authenticate
+header: content-type: application/x-www-form-urlencoded
 body(utf8): password=secret1234&username=user%40example.com
 
 == reauthorize ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /reauthorize
+header: content-type: application/x-www-form-urlencoded
 body(utf8): password=secret1234
 
 == create.request ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /create/request
+header: content-type: application/x-www-form-urlencoded
 body(utf8): email=user%40example.com&password=secret1234
 
 == delete.cancel ==
@@ -26,11 +29,13 @@ body: <nil>
 == email.change.request ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /email/request
+header: content-type: application/x-www-form-urlencoded
 body(utf8): newEmail=new%40example.com
 
 == password.reset.request ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /password/reset/request
+header: content-type: application/x-www-form-urlencoded
 body(utf8): email=user%40example.com
 
 == mfa.status.get ==

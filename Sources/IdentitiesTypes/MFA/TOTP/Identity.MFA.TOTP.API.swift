@@ -48,19 +48,19 @@ extension Identity.MFA.TOTP.API {
                 URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.confirmSetup)) {
                     Method.post
                     Path.confirm
-                    URLRouting.Body(.form(Identity.MFA.TOTP.ConfirmSetup.self, decoder: .identities))
+                    URLRouting.Body(coding: .form(Identity.MFA.TOTP.ConfirmSetup.self, decoder: .identities))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.verify)) {
                     Method.post
                     Path.verify
-                    URLRouting.Body(.json(Identity.MFA.TOTP.Verify.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.TOTP.Verify.self))
                 }
 
                 URLRouting.Route(.case(Identity.MFA.TOTP.API.cases.disable)) {
                     Method.post
                     Path.disable
-                    URLRouting.Body(.json(Identity.MFA.DisableRequest.self))
+                    URLRouting.Body(coding: .json(Identity.MFA.DisableRequest.self))
                 }
             }
         }

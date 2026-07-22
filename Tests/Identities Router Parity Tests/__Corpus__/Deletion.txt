@@ -1,6 +1,7 @@
 == api.request ==
 method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
 path: /api/delete/request
+header: content-type: application/x-www-form-urlencoded
 body(utf8): reauthToken=reauth-token-123
 
 == api.cancel ==
