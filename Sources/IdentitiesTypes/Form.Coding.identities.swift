@@ -6,16 +6,17 @@
 //
 
 import Foundation
-import URLFormCoding
+import HTML_Form_Coder_Codable
+import HTML_Standard
 
-extension URLFormCoding.Form.Decoder {
-    public static var identities: URLFormCoding.Form.Decoder {
-        URLFormCoding.Form.Decoder(arrayParsingStrategy: .bracketsWithIndices)
+extension HTML.Form.Coder.Decoder {
+    public static var identities: HTML.Form.Coder.Decoder {
+        HTML.Form.Coder.Decoder(arrayParsingStrategy: .bracketsWithIndices)
     }
 }
 
-extension URLFormCoding.Form.Encoder {
-    public static var identities: URLFormCoding.Form.Encoder {
-        URLFormCoding.Form.Encoder(arrayEncodingStrategy: .bracketsWithIndices)
+extension HTML.Form.Coder.Encoder {
+    public static var identities: HTML.Form.Coder.Encoder {
+        HTML.Form.Coder.Encoder(arrayEncodingStrategy: .bracketsWithIndices)
     }
 }
