@@ -11,7 +11,6 @@ import Foundation
 import JWT
 import RFC_6750
 import URLRouting
-import URL_Routing_Form_Coding
 
 extension Identity.Authentication {
     /// Authentication endpoints for managing user sessions and access.

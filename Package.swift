@@ -24,9 +24,6 @@ extension Target.Dependency {
     static var htmlStandard: Self {
         .product(name: "HTML Standard", package: "swift-html-standard")
     }
-    static var urlFormCodingURLRouting: Self {
-        .product(name: "URL Routing Form Coding", package: "swift-url-routing-form-coding")
-    }
     static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
     static var dependenciesTestSupport: Self {
         .product(name: "Dependencies Test Support", package: "swift-dependencies")
@@ -57,7 +54,6 @@ let package = Package(
         .package(url: "https://github.com/swift-ietf/swift-rfc-6750.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-url-routing.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-url-routing-authentication.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-url-routing-form-coding.git", branch: "main")
     ],
     targets: [
         .target(
@@ -72,7 +68,6 @@ let package = Package(
                 .authenticating,
                 .htmlFormCoder,
                 .htmlStandard,
-                .urlFormCodingURLRouting,
                 .taggedPrimitives
             ]
         ),

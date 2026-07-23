@@ -6,7 +6,6 @@
 //
 
 import URLRouting
-import URL_Routing_Form_Coding
 
 extension Identity.Reauthorization {
     /// A data structure representing a reauthorization request.

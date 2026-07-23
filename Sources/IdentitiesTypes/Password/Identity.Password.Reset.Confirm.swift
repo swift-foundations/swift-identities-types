@@ -6,7 +6,6 @@
 //
 
 import URLRouting
-import URL_Routing_Form_Coding
 
 extension Identity.Password.Reset {
     /// Confirmation data for completing a password reset.
