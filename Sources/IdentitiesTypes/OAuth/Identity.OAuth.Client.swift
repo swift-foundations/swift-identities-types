@@ -13,7 +13,7 @@ extension Identity.OAuth {
     @Witness
     public struct Client: @unchecked Sendable {
         /// Register an OAuth provider
-        public var registerProvider: (any Identity.OAuth.Provider) async throws(any Swift.Error) -> Void
+        public var registerProvider: (any Identity.OAuth.Provider) async throws(Identity.OAuth.Client.Error) -> Void
 
         /// Get a registered OAuth provider by identifier
         public var provider: (_ identifier: String) async throws(any Swift.Error) -> (any Identity.OAuth.Provider)?
