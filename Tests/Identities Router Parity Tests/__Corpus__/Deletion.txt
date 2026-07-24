@@ -1,16 +1,16 @@
 == api.request ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /api/delete/request
 header: content-type: application/x-www-form-urlencoded
 body(utf8): reauthToken=reauth-token-123
 
 == api.cancel ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /api/delete/cancel
 body: <nil>
 
 == api.confirm ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /api/delete/confirm
 body: <nil>
 

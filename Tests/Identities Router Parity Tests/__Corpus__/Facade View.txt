@@ -34,6 +34,6 @@ path: /mfa/manage
 body: <nil>
 
 == oauth.login ==
-method: Method(rawValue: "GET", isSafe: true, isIdempotent: true, isCacheable: true)
+method: GET
 path: /oauth/login
 body: <nil>

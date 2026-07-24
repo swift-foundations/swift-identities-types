@@ -1,10 +1,10 @@
 == api.current ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /logout
 body: <nil>
 
 == api.all ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /logout/all
 body: <nil>
 

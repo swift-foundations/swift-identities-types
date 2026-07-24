@@ -1,17 +1,17 @@
 == api.credentials ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /api/authenticate
 header: content-type: application/x-www-form-urlencoded
 body(utf8): password=secret1234&username=user%40example.com
 
 == api.token.access ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /api/authenticate/access
 header: cookie: access_token="eyJhbGciOiJub25lIn0.eyJzdWIiOiJwYXJpdHkifQ.AQID"
 body: <nil>
 
 == api.token.refresh ==
-method: Method(rawValue: "POST", isSafe: false, isIdempotent: false, isCacheable: true)
+method: POST
 path: /api/authenticate/refresh
 header: content-type: application/json
 body(utf8): "eyJhbGciOiJub25lIn0.eyJzdWIiOiJwYXJpdHkifQ.AQID"

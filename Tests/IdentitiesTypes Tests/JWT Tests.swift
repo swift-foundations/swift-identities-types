@@ -65,14 +65,14 @@ struct Test {
 }
 }
 
-extension BearerAuth {
+extension RFC_6750.Bearer {
 @Suite
 struct Test {
 
     @Test
     func `Creates bearer auth with token`() throws {
         let token = "sk-test-api-key-123"
-        let bearerAuth = try BearerAuth(token: token)
+        let bearerAuth = try RFC_6750.Bearer(token: token)
 
         #expect(bearerAuth.token == token)
     }
@@ -80,21 +80,21 @@ struct Test {
     @Test
     func `Bearer auth equality`() throws {
         let token = "test-token"
-        let auth1 = try BearerAuth(token: token)
-        let auth2 = try BearerAuth(token: token)
+        let auth1 = try RFC_6750.Bearer(token: token)
+        let auth2 = try RFC_6750.Bearer(token: token)
 
         #expect(auth1 == auth2)
     }
 
     @Test
     func `Bearer auth encoding and decoding`() throws {
-        let bearerAuth = try BearerAuth(token: "api-key-123")
+        let bearerAuth = try RFC_6750.Bearer(token: "api-key-123")
 
         let encoder = JSONEncoder()
         let data = try encoder.encode(bearerAuth)
 
         let decoder = JSONDecoder()
-        let decodedAuth = try decoder.decode(BearerAuth.self, from: data)
+        let decodedAuth = try decoder.decode(RFC_6750.Bearer.self, from: data)
 
         #expect(decodedAuth.token == bearerAuth.token)
         #expect(decodedAuth == bearerAuth)
@@ -102,8 +102,8 @@ struct Test {
 
     @Test
     func `Bearer auth router creates correct header`() throws {
-        let bearerAuth = try BearerAuth(token: "test-token-123")
-        let router = BearerAuth.Router()
+        let bearerAuth = try RFC_6750.Bearer(token: "test-token-123")
+        let router = RFC_6750.Bearer.Router()
 
         let request = try router.request(for: bearerAuth)
 
@@ -113,8 +113,8 @@ struct Test {
 
     // @Test
     // This test requires URLRequestData which needs different handling
-    // func testBearerAuthRouterParsing() throws {
-    //     let router = BearerAuth.Router()
+    // func `Bearer router parses the Authorization header`() throws {
+    //     let router = RFC_6750.Bearer.Router()
     //
     //     var request = URLRequestData()
     //     request.headers = ["Authorization": ["Bearer test-token-456"]]

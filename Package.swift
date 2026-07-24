@@ -17,7 +17,7 @@ extension Target.Dependency {
     static var dual: Self { .product(name: "Dual", package: "swift-dual") }
     static var rfc6750: Self { .product(name: "RFC 6750", package: "swift-rfc-6750") }
     static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
-    static var authenticating: Self { .product(name: "Authentication Foundation Integration", package: "swift-url-routing-authentication") }
+    static var urlRoutingFoundationIntegration: Self { .product(name: "URL Routing Foundation Integration", package: "swift-url-routing") }
     static var htmlFormCoder: Self {
         .product(name: "HTML Form Coder Codable", package: "swift-html-form-coder")
     }
@@ -53,7 +53,6 @@ let package = Package(
         .package(url: "https://github.com/swift-foundations/swift-dual.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-6750.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-url-routing.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-url-routing-authentication.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -65,7 +64,7 @@ let package = Package(
                 .dual,
                 .rfc6750,
                 .urlRouting,
-                .authenticating,
+                .urlRoutingFoundationIntegration,
                 .htmlFormCoder,
                 .htmlStandard,
                 .taggedPrimitives
